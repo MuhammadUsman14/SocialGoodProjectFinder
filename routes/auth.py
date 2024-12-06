@@ -6,14 +6,14 @@ from datetime import datetime
 from geopy.geocoders import Nominatim
 
 app = Flask(__name__)
-app.secret_key = '3683a25f2a44fc627f33d91ec7cd654151f8696a6fffd057'  # Replace with a secure secret key for sessions
+app.secret_key = ''  # Replace with a secure secret key for sessions
 
 # Function to establish a connection to the database
 def connect_db():
     return mysql.connector.connect(
         host="localhost",  # e.g., localhost or IP
         user="root",   # MySQL username
-        password="@MySeniorProJecT21",  # MySQL password
+        password="",  # MySQL password
         database="social_good"  # Database name
     )
 
