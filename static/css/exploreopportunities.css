@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: white;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+}
+
+.main-container {
+    display: flex;
+    margin: 20px;
+}
+
+.filters {
+    width: 25%;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.filters input,
+.filters select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filter-group {
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.opportunity-dashboard {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.opportunity-card {
+    background-color: white;
+    padding: 20px;
+    width: calc(33% - 20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.opportunity-card h3 {
+    margin-top: 0;
+}
+
+.opportunity-card p {
+    margin: 10px 0;
+}
+
+.opportunity-card .view-details {
+    text-align: right;
+    font-weight: bold;
+    color: #3498db;
+    cursor: pointer;
+}
+
+.opportunity-card .view-details:hover {
+    text-decoration: underline;
+}

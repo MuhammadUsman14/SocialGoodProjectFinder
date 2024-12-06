@@ -1,2 +1,4 @@
-# Python dependencies
 Flask
+Werkzeug
+mysql-connector-python
+geopy

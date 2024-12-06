@@ -8,8 +8,15 @@ app.secret_key = '3683a25f2a44fc627f33d91ec7cd654151f8696a6fffd057'
 # Home Route - displays the login or signup page
 @app.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('start.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/exploreopportunities')
+def explore_opportunities():
+    return render_template('exploreopportunities.html')
 
 # Signup Route - handles the signup form submission
 @app.route('/signup', methods=['GET', 'POST'])
@@ -33,7 +40,7 @@ def signup():
         flash('Account created successfully! Please login.', 'success')
         return redirect(url_for('login'))
     
-    return render_template('login.html')  # Render the sign-up page if GET request
+    return render_template('signup.html')  # Render the sign-up page if GET request
 
 
 # Login Route - handles both GET (to show the form) and POST (to process the form submission)
@@ -55,7 +62,7 @@ def login():
             flash('Invalid email or password. Please try again.', 'danger')  # Show error if login fails
             return redirect(url_for('login'))  # Stay on the login page if credentials are incorrect
     # If GET request, render the login page
-    return render_template('welcome.html')  # Render the login form
+    return render_template('login.html')  # Render the login form
 
 
 # Skills API Route for AJAX pagination
@@ -128,7 +135,6 @@ def profile_setup():
         mobile_number_on_file=mobile_number_on_file,
         skip_enabled=skip_enabled
     )
-
 
 @app.route('/dashboard')
 def dashboard():
