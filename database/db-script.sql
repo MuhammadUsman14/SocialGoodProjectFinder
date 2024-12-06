@@ -7,12 +7,13 @@ drop table if exists Users;
 create table Users (
 	user_id       INT       not null     primary key      auto_increment,
 	first_name       VARCHAR(75)        not null,
-	last_name        VARCHAR(80)        not null,
+	last_name        VARCHAR(80),
 	email            VARCHAR(140)       unique       not null,
 	password_hash    VARCHAR(255)       not null,
-	address          VARCHAR(255)       not null,
-	location_lat         DECIMAL(9, 6)       not null,
-	location_lon         DECIMAL(9, 6)       not null,
+	mobile_number    VARCHAR(20)        unique,
+	address          VARCHAR(255),
+	location_lat         DECIMAL(9, 6),
+	location_lon         DECIMAL(9, 6),
 	created_at       DATETIME        default     current_timestamp      not null
 );
 
@@ -84,6 +85,20 @@ create table Opportunities_Skills (
     FOREIGN KEY (opportunity_id) REFERENCES Volunteer_Opportunities(opportunity_id) ON DELETE CASCADE,
     FOREIGN KEY (skill_id) REFERENCES Skills(skill_id) ON DELETE CASCADE
 );
+
+-- Create User_Opportunities table to track interest in opportunities
+DROP TABLE IF EXISTS User_Opportunities;
+CREATE TABLE User_Opportunities (
+    record_id         INT       NOT NULL      PRIMARY KEY      AUTO_INCREMENT,
+    user_id           INT       NOT NULL,
+    opportunity_id    INT       NOT NULL,
+    expressed_on      DATETIME  DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    comment           TEXT,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (opportunity_id) REFERENCES Volunteer_Opportunities(opportunity_id) ON DELETE CASCADE
+);
+
+ALTER TABLE User_Opportunities AUTO_INCREMENT = 30000;
 
 
 -- Create VolunteerHours table

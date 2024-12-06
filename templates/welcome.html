@@ -4,25 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Welcome - Social Good Project Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Social Good Project Finder | Welcome</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="form-container">
-            <form id="user-info-form">
-                <h1>Welcome, [User First Name]!</h1>
-                <p>Please fill in your information to start matching with volunteer opportunities.</p>
-                <input type="text" id="location" placeholder="Location" required>
-                <input type="text" id="skills" placeholder="Skills" required>
-                <textarea id="bio" placeholder="Short Bio" required></textarea>
-                <button type="submit">Save Information</button>
+    <div class="container" id="container">
+        <!-- Sign In Form -->
+        <div class="form-container sign-in" id="login-form">
+            <form method="POST" action="{{ url_for('login') }}">
+                <h1>Login to Find Opportunities</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                </div>
+                <span>or use your email and password</span>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <a href="#">Forgot Your Password?</a>
+                <button type="submit">Login</button>
+                <p class="toggle-link">Don't have an account? <a href="javascript:void(0)" onclick="toggleForm()">Sign up here</a></p>
             </form>
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>
