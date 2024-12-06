@@ -15,7 +15,7 @@ geolocator = Nominatim(user_agent="social_good_app")
 conn = mysql.connector.connect(
     host="localhost",
     user="root",  # Replace with your MySQL username
-    password="@MySeniorProJecT21",  # Replace with your MySQL password
+    password="",  # Replace with your MySQL password
     database="social_good"  # Replace with your database name
 )
 
