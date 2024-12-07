@@ -1,0 +1,264 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f4f6f9;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    background-color: #2c3e50; /* Dark background */
+    padding: 15px 20px; /* Add padding for better spacing */
+    position: sticky; /* Make navbar stick to the top on scroll */
+    top: 0;
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between; /* Spread logo and links */
+    align-items: center; /* Center align items vertically */
+    max-width: 1200px; /* Limit width for better aesthetics */
+    margin: 0 auto; /* Center align the navbar container */
+}
+
+.navbar-logo .logo {
+    font-size: 1.5em; /* Slightly larger font for the logo */
+    font-weight: bold; /* Bold to emphasize branding */
+    color: #ecf0f1; /* Light font color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar-logo .logo:hover {
+    color: #f39c12; /* Highlight color on hover */
+}
+
+.navbar-links {
+    display: flex; /* Align links in a row */
+    list-style: none; /* Remove default bullet points */
+    padding: 0; /* Reset padding */
+    margin: 0; /* Reset margin */
+    gap: 15px; /* Space between links */
+}
+
+.navbar-links .nav-link {
+    color: #ecf0f1; /* Light font color */
+    font-size: 1em; /* Consistent font size */
+    text-decoration: none; /* Remove underline */
+    padding: 8px 12px; /* Add padding for clickable area */
+    border-radius: 5px; /* Smooth corners */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar-links .nav-link:hover {
+    background-color: #34495e; /* Subtle background on hover */
+    color: #f39c12; /* Highlight text color on hover */
+}
+
+.navbar-links .active {
+    background-color: #f39c12; /* Highlight active page */
+    color: #2c3e50; /* Contrast text color */
+    font-weight: bold; /* Bold to indicate current page */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column; /* Stack logo and links vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+    .navbar-links {
+        flex-direction: column; /* Stack links vertically */
+        gap: 10px; /* Reduce gap for better fit */
+    }
+}
+
+
+/* Dropdown Menu */
+.category-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Main Content */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.recommended {
+    width: 30%;
+}
+
+.opportunities {
+    width: 65%;
+}
+
+.opportunity-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.opportunity-item h3 {
+    margin: 0 0 10px;
+    color: #1A3C6C;
+}
+
+.opportunity-item h3:hover {
+    color: #f1c40f;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Filters Container */
+.filters-container {
+    background-color: #ecf0f1; /* Light background */
+    padding: 15px 20px; /* Add spacing */
+    border-bottom: 1px solid #bdc3c7; /* Subtle border for separation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
+}
+
+/* Filters Group */
+.filter-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between; /* Spread out items */
+    gap: 15px; /* Space between filter items */
+}
+
+/* Filter Items */
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(33.33% - 15px); /* Take up equal width, minus gap */
+    min-width: 200px; /* Ensure a minimum width */
+}
+
+.filter-label {
+    font-size: 0.9em; /* Slightly smaller text */
+    color: #2c3e50; /* Dark text for readability */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+/* Input Styles */
+.filters-container input,
+.filters-container .dropdown-toggle {
+    padding: 10px 15px;
+    border: 1px solid #bdc3c7; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1em; /* Consistent font size */
+    background-color: white;
+    color: #34495e; /* Neutral dark text */
+    transition: all 0.3s ease; /* Smooth hover/focus effects */
+}
+
+.filters-container input:focus,
+.filters-container .dropdown-toggle:hover {
+    border-color: #3498db; /* Highlight border on hover/focus */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Subtle glow */
+    outline: none; /* Remove default outline */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Buttons */
+.filter-buttons {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+    justify-content: flex-end; /* Align buttons to the right */
+    margin-top: 10px; /* Space above buttons */
+}
+
+.apply-button,
+.clear-button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.apply-button {
+    background-color: #2ecc71; /* Green for apply */
+    color: white;
+}
+
+.apply-button:hover {
+    background-color: #27ae60; /* Darker green on hover */
+}
+
+.clear-button {
+    background-color: #e74c3c; /* Red for clear */
+    color: white;
+}
+
+.clear-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .filter-group {
+        flex-direction: column; /* Stack filters vertically on smaller screens */
+    }
+
+    .filter-buttons {
+        justify-content: center; /* Center buttons on smaller screens */
+    }
+}

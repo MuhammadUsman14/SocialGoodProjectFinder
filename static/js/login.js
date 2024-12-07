@@ -14,12 +14,11 @@ function showAlert(message, type = 'info') {
 }
 
 // Handle Login Form Submission
-document.getElementById("loginForm").addEventListener("submit", function (event) {
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // Prevent form from refreshing the page
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    const rememberMe = document.getElementById("rememberMe").checked;
 
     // Form Validation
     if (!email || !password) {
@@ -27,41 +26,28 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         return;
     }
 
-    // Simulate Login Action
-    console.log("Logging in with:", { email, password, rememberMe });
-    showAlert("Login Successful! Redirecting...", "success");
+    try {
+        // Send login data to the backend
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        });
 
-    // Redirect to Welcome Page
-    setTimeout(() => {
-        window.location.href = "/welcome";
-    }, 2000);
-});
+        const data = await response.json();
 
-// Handle Forgot Password
-document.getElementById("forgotPassword").addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default behavior
-    showAlert("Redirecting to password recovery page...", "info");
-
-    setTimeout(() => {
-        window.location.href = "/forgot-password";
-    }, 1000);
-});
-
-// Handle Social Login Buttons
-document.getElementById("facebookLogin").addEventListener("click", function () {
-    showAlert("Facebook login clicked!", "info");
-});
-
-document.getElementById("googleLogin").addEventListener("click", function () {
-    showAlert("Google login clicked!", "info");
-});
-
-// Handle Sign-Up Link
-document.getElementById("signupLink").addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default behavior
-    showAlert("Redirecting to Sign-Up page...", "info");
-
-    setTimeout(() => {
-        window.location.href = "/signup";
-    }, 1000);
+        if (response.ok) {
+            showAlert(data.message || "Login Successful! Redirecting...", "success");
+            setTimeout(() => {
+                window.location.href = "/dashboard"; // Redirect to dashboard
+            }, 2000);
+        } else {
+            showAlert(data.message || "Login failed. Please try again.", "danger");
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
+        showAlert("An error occurred. Please try again later.", "danger");
+    }
 });

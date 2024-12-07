@@ -22,3 +22,32 @@ function loadMoreSkills() {
         })
         .catch(error => console.error('Error fetching more skills:', error));
 }
+
+// Live character counter for bio
+const bioInput = document.getElementById('bio');
+const bioCounter = document.getElementById('bioCounter');
+
+bioInput.addEventListener('input', () => {
+    const length = bioInput.value.length;
+    bioCounter.textContent = `${length}/300`;
+    if (length > 300) {
+        bioCounter.style.color = 'red';
+    } else {
+        bioCounter.style.color = '#666';
+    }
+});
+
+document.getElementById("profileForm").addEventListener("submit", function (event) {
+    const countryCode = document.getElementById("countryCode").value.trim();
+    const phone = document.getElementById("mobileNumber").value.trim();
+
+    // Validate the phone number
+    if (!/^\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        event.preventDefault();
+        return;
+    }
+
+    const formattedNumber = `${countryCode} ${phone}`;
+    console.log("Formatted Phone Number:", formattedNumber);
+});

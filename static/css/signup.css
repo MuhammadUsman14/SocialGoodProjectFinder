@@ -21,14 +21,14 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.nav-left .nav-logo {
+.nav-logo {
     font-size: 26px;
     font-weight: bold;
     color: #007bff;
     text-decoration: none;
 }
 
-.nav-right .nav-link {
+.nav-link {
     margin-left: 20px;
     color: #333;
     text-decoration: none;
@@ -38,12 +38,8 @@ body {
     transition: background 0.3s, color 0.3s;
 }
 
-.nav-right .nav-link:hover {
-    background-color: #007bff;
-    color: #ffffff;
-}
-
-.nav-right .active {
+.nav-link:hover,
+.nav-link.active {
     background-color: #007bff;
     color: #ffffff;
 }
@@ -51,10 +47,9 @@ body {
 /* Main Content Layout */
 .main-content {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 40px;
+    flex-wrap: wrap;
     gap: 40px;
+    padding: 40px;
     max-width: 1200px;
     margin: 40px auto;
 }
@@ -62,6 +57,7 @@ body {
 /* Left Side: Instructions */
 .instructions {
     flex: 1;
+    padding-right: 20px;
 }
 
 .header-text {
@@ -111,12 +107,6 @@ body {
     padding: 30px;
 }
 
-.form-wrapper h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
 form label {
     display: block;
     font-size: 14px;
@@ -125,7 +115,8 @@ form label {
     color: #555;
 }
 
-form input {
+form input,
+form select {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 20px;
@@ -135,16 +126,11 @@ form input {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-form input:focus {
+form input:focus,
+form select:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     outline: none;
-}
-
-.password-strength {
-    font-size: 14px;
-    color: #dc3545; /* Default: Weak */
-    margin-bottom: 10px;
 }
 
 form button {
@@ -162,52 +148,4 @@ form button {
 
 form button:hover {
     background-color: #0056b3;
-}
-
-form a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-form a:hover {
-    text-decoration: underline;
-}
-
-/* Phone Number Section */
-.phone-input {
-    display: flex;
-    gap: 0; /* No space between the elements */
-    align-items: center; /* Vertically center the elements */
-}
-
-.phone-input select,
-.phone-input input {
-    padding: 12px 15px; /* Same padding as the Full Name input */
-    font-size: 14px; /* Same font size as the Full Name input */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    height: 50px; /* Same height as the Full Name input */
-    width: 100%; /* Make it fill the container */
-    max-width: 100%; /* Avoid overflow */
-}
-
-.phone-input input {
-    flex-grow: 1; /* Allow the phone number input to take up the remaining space */
-}
-
-.phone-input select {
-    width: 120px; /* Adjust this width for the dropdown to make it match the Full Name input width */
-    font-size: 12px; /* Reduced font size for better alignment */
-}
-
-/* Additional Tweaks */
-form input[type="tel"] {
-    height: 50px; /* Ensure the phone number input height is the same as full name input */
-    padding: 12px 15px; /* Adjust padding to match full name input */
-}
-
-.phone-input select,
-.phone-input input {
-    font-size: 14px; /* Ensures uniform font size */
-    line-height: 20px; /* Ensures alignment with text */
 }

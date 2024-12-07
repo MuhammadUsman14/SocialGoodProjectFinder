@@ -9,30 +9,43 @@
 </head>
 
 <body>
+    <nav class="navbar">
+        <a href="/" class="logo">Social Good Project Finder</a>
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
     <div class="container">
         <h1>Set Up Your Profile</h1>
-        <form action="/profile_setup" method="POST">
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" placeholder="Enter your address" value="{{ user_profile.address }}">
+        <p class="instructions">Complete your profile to unlock tailored opportunities. Fields marked with * are required.</p>
+        <form id="profileForm" action="/profile_setup" method="POST">
+            <!-- Address Section -->
+            <label for="address">Address *</label>
+            <input type="text" id="address" name="address" placeholder="Enter your address" value="{{ user_profile.address }}" required>
             {% if address_on_file %}
-                <p>We have "{{ address_on_file }}" on file. Enter a new address if you'd like to update it.</p>
+                <p class="info">We have "{{ address_on_file }}" on file. Enter a new address if you'd like to update it.</p>
             {% endif %}
 
-            <label for="mobile_number">Mobile Number:</label>
+            <!-- Mobile Number Section -->
+            <label for="mobile_number">Mobile Number *</label>
             <div class="phone-container">
-                <select name="country_code" class="country-code-select" required>
+                <select name="country_code" id="countryCode" class="country-code-select" required>
                     <option value="+1">+1 (USA)</option>
                     <option value="+44">+44 (UK)</option>
                     <option value="+91">+91 (India)</option>
                     <option value="+61">+61 (Australia)</option>
                 </select>
-                <input type="text" name="mobile_number" class="phone-input" placeholder="Enter your phone number" value="{{ user_profile.mobile_number }}">
+                <input type="text" id="mobileNumber" name="mobile_number" class="phone-input" placeholder="Enter your phone number" value="{{ user_profile.mobile_number }}" required>
             </div>
             {% if mobile_number_on_file %}
-                <p>We have "{{ mobile_number_on_file }}" on file. Enter a new phone number if you'd like to update it.</p>
-            {% endif %}
+            <p>We have "{{ mobile_number_on_file.replace(' ', '').replace('+', ' +') }}" on file. Enter a new phone number if you'd like to update it.</p>
+                {% endif %}
+        
 
-            <h2>Select Your Skills</h2>
+            <!-- Skills Section -->
+            <h2>Select Your Skills *</h2>
             <div class="skills-list" id="skills-list">
                 {% for skill in skills %}
                     <div class="skill-item">
@@ -42,19 +55,23 @@
                     </div>
                 {% endfor %}
             </div>
-            <button type="button" onclick="loadMoreSkills()">Show More Skills</button>
+            <button type="button" class="load-more-button" onclick="loadMoreSkills()">Show More Skills</button>
 
-            <label for="new_skill">Add a New Skill:</label>
-            <input type="text" id="new_skill" name="new_skill" placeholder="Enter a new skill">
+            <label for="new_skill">Add a New Skill</label>
+            <input type="text" id="newSkill" name="new_skill" placeholder="Enter a new skill">
 
-            <label for="bio">Short Bio:</label>
-            <textarea id="bio" name="bio" rows="5" placeholder="Tell us about yourself...">{{ user_profile.bio }}</textarea>
+            <!-- Bio Section -->
+            <label for="bio">Short Bio *</label>
+            <textarea id="bio" name="bio" rows="5" placeholder="Tell us about yourself..." required>{{ user_profile.bio }}</textarea>
+            <p class="character-counter" id="bioCounter">0/300</p>
 
-            {% if skip_enabled %}
-                <a href="{{ url_for('dashboard') }}"><button type="button" class="skip-button">Skip</button></a>
-            {% else %}
-                <button type="submit">Save Profile</button>
-            {% endif %}
+            <!-- Buttons -->
+            <div class="button-group">
+                {% if skip_enabled %}
+                    <a href="{{ url_for('dashboard') }}" class="skip-button">Skip</a>
+                {% endif %}
+                <button type="submit" class="save-button">Save Profile</button>
+            </div>
         </form>
     </div>
 

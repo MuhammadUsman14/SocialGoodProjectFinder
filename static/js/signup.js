@@ -16,18 +16,14 @@ function showAlert(message, type = 'info') {
     `;
     alertDiv.textContent = message;
 
-    // Append Alert to Body
     document.body.appendChild(alertDiv);
 
-    // Remove Alert After 4 Seconds
-    setTimeout(() => {
-        alertDiv.remove();
-    }, 4000);
+    setTimeout(() => alertDiv.remove(), 4000);
 }
 
 // Handle Signup Form Submission
-document.getElementById("signupForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent form from refreshing the page
+document.getElementById("signupForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
 
     const fullName = document.getElementById("fullName").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -35,41 +31,47 @@ document.getElementById("signupForm").addEventListener("submit", function (event
     const phone = document.getElementById("phone").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    // Validate Inputs
     if (!fullName || !email || !phone || !password) {
         showAlert("Please fill in all fields.", "danger");
         return;
     }
 
-    // Prepare data to be sent to the backend
+    if (!/^\d{10}$/.test(phone)) {
+        showAlert("Please enter a valid 10-digit phone number.", "danger");
+        return;
+    }
+
+    if (password.length < 8) {
+        showAlert("Password must be at least 8 characters long.", "danger");
+        return;
+    }
+
+    const formattedMobileNumber = `${countryCode}${phone}`;
+
     const formData = {
         fullName,
         email,
-        mobileNumber: countryCode + phone, // Combine the country code and phone number
-        password
+        mobileNumber: formattedMobileNumber,
+        password,
     };
 
-    // Send the form data to the backend using fetch
-    fetch('/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showAlert("Signup Successful! Redirecting...", "success");
-            setTimeout(() => {
-                window.location.href = "/login"; // Redirect to login page
-            }, 2000);
+    try {
+        const response = await fetch('/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            showAlert(data.message || "Signup successful! Redirecting...", "success");
+            setTimeout(() => window.location.href = "/profile_setup", 2000);
         } else {
             showAlert(data.message || "Signup failed. Please try again.", "danger");
         }
-    })
-    .catch(error => {
-        showAlert("An error occurred. Please try again.", "danger");
+    } catch (error) {
+        showAlert("An error occurred. Please try again later.", "danger");
         console.error("Error during signup:", error);
-    });
+    }
 });

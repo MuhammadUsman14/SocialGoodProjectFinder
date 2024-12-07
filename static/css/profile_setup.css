@@ -1,46 +1,86 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #8e9eab, #eef2f3);
-    color: #333;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
+    background: linear-gradient(to bottom, #e9f5ff, #ffffff);
+    color: #333;
 }
 
+/* Navbar Styles */
+.navbar {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Container Styles */
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 50px auto;
     background: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-    color: #4a90e2;
+h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.instructions {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #666;
 }
 
-input, textarea, select, button {
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
     padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
+    margin-bottom: 15px;
     border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
-button {
-    background: #4a90e2;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #357abd;
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
 }
 
 .skills-list {
@@ -51,26 +91,51 @@ button:hover {
 
 .skill-item {
     background: #f1f1f1;
-    border-radius: 20px;
     padding: 8px 12px;
+    border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .skill-item:hover {
-    background: #4a90e2;
+    background: #007bff;
     color: white;
 }
 
-.phone-container {
-    display: flex;
-    gap: 10px;
+/* Buttons */
+button {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.country-code-select {
-    width: 120px;
+button:hover {
+    opacity: 0.9;
 }
 
-.phone-input {
-    width: calc(100% - 130px);
+.save-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.load-more-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.skip-button {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 12px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+}
+
+.character-counter {
+    font-size: 12px;
+    text-align: right;
+    color: #666;
 }

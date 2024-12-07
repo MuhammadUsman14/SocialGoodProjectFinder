@@ -18,54 +18,66 @@ def contact():
 def explore_opportunities():
     return render_template('exploreopportunities.html')
 
-# Signup Route - handles the signup form submission
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # Get form data
     if request.method == 'POST':
-        full_name = request.form['full_name']
-        email = request.form['email']
-        password = request.form['password']
-        country_code = request.form['countryCode']
-        phone_number = request.form['phone']
-        mobile_number = f"{country_code}{phone_number}"  # Combine country code and phone number
+        try:
+            data = request.get_json()
 
-        # Print out the user input to the terminal
-        print(f"User signed up with Full Name: {full_name}, Email: {email}, Mobile Number: {mobile_number}")
+            full_name = data.get('fullName')
+            email = data.get('email')
+            password = data.get('password')
+            mobile_number = data.get('mobileNumber')
 
-        # Call the create_user function from auth.py to insert the user into the database
-        error = create_user(full_name, email, password, mobile_number)
-        
-        if error:
-            flash(f"Error: {error}", 'danger')
-            return redirect(url_for('signup'))  # Go back to the signup page if there was an error
-    
-        flash('Account created successfully! Please login.', 'success')
-        return redirect(url_for('login'))
-    
-    return render_template('signup.html')  # Render the sign-up page if GET request
+            if not all([full_name, email, password, mobile_number]):
+                return jsonify({'success': False, 'message': 'All fields are required.'}), 400
+
+            if not mobile_number.startswith('+') or len(mobile_number) < 12:
+                return jsonify({'success': False, 'message': 'Invalid mobile number format.'}), 400
+
+            error = create_user(full_name, email, password, mobile_number)
+            
+            if error:
+                return jsonify({'success': False, 'message': f"Database error: {error}"}), 500
+
+            return jsonify({'success': True, 'message': 'Account created successfully! Redirecting...'}), 200
+
+        except Exception as e:
+            print(f"Error during signup: {e}")
+            return jsonify({'success': False, 'message': 'An unexpected error occurred.'}), 500
+
+    return render_template('signup.html')
 
 
-# Login Route - handles both GET (to show the form) and POST (to process the form submission)
+
+
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Get the login credentials from the form
-        email = request.form['email']
-        password = request.form['password']
+        try:
+            # Parse JSON data from the request
+            data = request.json
+            email = data.get('email')
+            password = data.get('password')
 
-        # Call the verify_user function from auth.py to check if the credentials are valid
-        user_id = verify_user(email, password)  # Now verify_user returns user_id or None if invalid
-        if user_id:
-            session['user_email'] = email  # Save the email to session
-            session['user_id'] = user_id  # Save the user ID to session
-            flash('Login successful! Welcome back.', 'success')
-            return redirect(url_for('profile_setup'))  # Redirect to profile_setup after successful login
-        else:
-            flash('Invalid email or password. Please try again.', 'danger')  # Show error if login fails
-            return redirect(url_for('login'))  # Stay on the login page if credentials are incorrect
-    return render_template('login.html')  # Render the login form if it's a GET request
+            if not email or not password:
+                return jsonify({'success': False, 'message': 'Email and password are required.'}), 400
 
+            # Verify user
+            user_id = verify_user(email, password)
+            if user_id:
+                session['user_email'] = email
+                session['user_id'] = user_id
+                return jsonify({'success': True, 'message': 'Login successful!'}), 200
+
+            return jsonify({'success': False, 'message': 'Invalid email or password.'}), 401
+        except Exception as e:
+            print(f"Login error: {e}")
+            return jsonify({'success': False, 'message': 'An unexpected error occurred.'}), 500
+
+    return render_template('login.html')
 
 
 
@@ -139,6 +151,7 @@ def profile_setup():
         mobile_number_on_file=mobile_number_on_file,
         skip_enabled=skip_enabled
     )
+
 
 @app.route('/dashboard')
 def dashboard():
@@ -378,9 +391,9 @@ def logout():
 
 
 # Welcome Route - displays the welcome page after login or signup
-@app.route('/welcome')
+@app.route('/dashboard')
 def welcome():
-    return render_template('welcome.html')
+    return render_template('dashboard.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

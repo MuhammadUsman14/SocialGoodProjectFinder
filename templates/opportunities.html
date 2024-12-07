@@ -1,418 +1,126 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opportunities</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Global Styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f4f6f9;
-        }
-
-        /* Navigation Bar */
-        nav {
-            background-color: #2c3e50;
-            padding: 15px;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            margin-right: 30px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
-
-        nav ul li a.active {
-            font-weight: bold;
-        }
-
-        /* Filters Bar */
-        .filters-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #3498db;
-            padding: 15px 20px;
-            margin-bottom: 30px;
-            gap: 20px; /* Adds space between filters */
-        }
-
-        .filters-bar form {
-            display: flex;
-            gap: 15px; /* Space between form elements */
-            flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
-            align-items: center;
-            margin: 0;
-        }
-
-        .filters-bar input,
-        .filters-bar select,
-        .filters-bar button {
-            padding: 10px 15px;
-            border-radius: 25px;
-            border: 1px solid #2980b9;
-            font-size: 1em;
-        }
-
-        .filters-bar button {
-            background-color: #2980b9;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .filters-bar button:hover {
-            background-color: #3498db;
-        }
-
-        .filters-bar .clear-filters {
-            background-color: #e74c3c;
-        }
-
-        .filters-bar .clear-filters:hover {
-            background-color: #c0392b;
-        }
-
-        /* Category Dropdown */
-        .category-dropdown {
-            position: relative;
-            width: 200px;
-        }
-
-        .dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            border-radius: 25px;
-            border: 1px solid #2980b9;
-            cursor: pointer;
-            background-color: white;
-            font-size: 1em;
-        }
-
-        .arrow {
-            margin-left: 10px;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 50px;
-            left: 0;
-            width: 100%;
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            z-index: 10;
-        }
-
-        .dropdown-item {
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-
-        .dropdown-item:hover,
-        .dropdown-item.selected {
-            background-color: #3498db;
-            color: white;
-        }
-
-        /* Main Content Layout */
-        .container {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-
-        /* Recommended Opportunities Section */
-        .recommended {
-            width: 30%;
-        }
-
-        .recommended ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .recommended ul li {
-            background-color: #fff;
-            margin-bottom: 10px;
-            padding: 12px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Opportunities Section */
-        .opportunities {
-            width: 65%;
-        }
-
-        .opportunity-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .opportunity-item {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        /* Opportunity Title */
-        .opportunity-item h3 {
-            font-size: 1.9em; /* Larger title */
-            margin-bottom: 10px;
-            color: #1A3C6C; /* Dark blue */
-            transition: color 0.3s ease;
-            text-decoration: none; /* Remove underlining */
-        }
-
-        /* Title Hover Effect */
-        .opportunity-item h3:hover {
-            color: #f1c40f; /* Yellow on hover */
-        }
-
-        /* Remove underline from the link around the title */
-        .opportunity-item a {
-            text-decoration: none; /* Remove underline */
-        }
-
-        /* Organization Styling */
-        .opportunity-item .organization {
-            font-size: 1.0em; /* Slightly smaller than title */
-            margin-bottom: 5px;
-            color: #7f8c8d;
-        }
-
-        /* Dates Styling */
-        .opportunity-item .dates {
-            font-size: 0.7em; /* Even smaller than organization */
-            color: #95a5a6;
-        }
-
-        /* Numbering for Opportunities */
-        .opportunity-item .opportunity-index {
-            font-size: 1.5em; /* Slightly larger font for the number */
-            font-weight: bold; /* Make the number bold */
-            color: #7f8c8d;  /* Gray color */
-            margin-right: 10px;  /* Space between the number and the title */
-            display: inline-block; /* Keep the number inline with the title */
-        }
-
-        .pagination-button {
-            padding: 10px 15px;
-            background-color: #2980b9;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-        }
-
-        .pagination-button:hover {
-            background-color: #3498db;
-        }
-
-        .pagination-button:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-
-        .pagination-info {
-            margin: 0 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/opportunities.css') }}">
 </head>
 <body>
-
-    <!-- Navigation Bar (Opportunities is selected) -->
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ url_for('opportunities') }}" class="active">Opportunities</a></li>
-            <li><a href="{{ url_for('profile_setup') }}">Profile</a></li>
-        </ul>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo Section -->
+            <div class="navbar-logo">
+                <a href="{{ url_for('dashboard') }}" class="logo">Social Good Finder</a>
+            </div>
+            <!-- Navigation Links -->
+            <ul class="navbar-links">
+                <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
+                <li><a href="/opportunities" class="nav-link active">Opportunities</a></li>
+                <li><a href="/profile_setup" class="nav-link">Profile</a></li>
+                <li><a href="/login" class="nav-link">Logout</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Filters Bar -->
-    <div class="filters-bar">
-        <form action="{{ url_for('opportunities') }}" method="GET">
+<!-- Filters Section -->
+<div class="filters-container">
+    <form id="filterForm" action="{{ url_for('opportunities') }}" method="GET">
+        <div class="filter-group">
             <!-- Location Filter -->
-            <input 
-                type="text" 
-                name="location" 
-                id="location" 
-                placeholder="Enter City, State (e.g., Anaheim, CA)" 
-                value="{{ request.args.get('location', '') }}" 
-            />
+            <div class="filter-item">
+                <label for="location" class="filter-label">Location:</label>
+                <input type="text" name="location" id="location" placeholder="Enter City, State" value="{{ request.args.get('location', '') }}">
+            </div>
 
             <!-- Category Filter -->
-            <div class="category-dropdown">
-                <div class="dropdown-toggle" id="category-dropdown">
-                    Category <span class="arrow">▼</span>
+            <div class="filter-item">
+                <label for="category" class="filter-label">Category:</label>
+                <div class="category-dropdown">
+                    <div class="dropdown-toggle" id="category-dropdown">Select Category <span class="arrow">▼</span></div>
+                    <ul class="dropdown-menu" id="category-menu">
+                        {% for category in categories %}
+                            <li class="dropdown-item" data-value="{{ category }}">{{ category }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                <ul class="dropdown-menu" id="category-menu">
-                    {% for category in categories %}
-                        <li class="dropdown-item" data-value="{{ category }}">{{ category }}</li>
-                    {% endfor %}
-                </ul>
             </div>
 
             <!-- Skills Filter -->
-            <input 
-                type="text" 
-                name="skills" 
-                id="skills" 
-                placeholder="Enter Skills" 
-                value="{{ request.args.get('skills', '') }}" 
-            />
+            <div class="filter-item">
+                <label for="skills" class="filter-label">Skills:</label>
+                <input type="text" name="skills" id="skills" placeholder="Enter Skills" value="{{ request.args.get('skills', '') }}">
+            </div>
+        </div>
 
-            <!-- Apply Filters Button -->
-            <button type="submit">Apply Filters</button>
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button type="submit" class="apply-button">Apply Filters</button>
+            <button type="button" class="clear-button" id="clear-filters">Clear Filters</button>
+        </div>
+    </form>
+</div>
 
-            <!-- Clear Filters Button -->
-            <button class="clear-filters" type="button" id="clear-filters">Clear Filters</button>
-        </form>
-    </div>
 
-    <!-- Main Content Section -->
+    <!-- Main Content -->
     <div class="container">
-        
-        <!-- Recommended Opportunities Section -->
+        <!-- Recommended Opportunities -->
         <aside class="recommended">
             <h2>Recommended for You</h2>
             <ul>
-                {% for opportunity in recommended_opportunities %}
-                <li>
-                    {{ opportunity.title }}
-                </li>
-                {% endfor %}
+                {% if recommended_opportunities %}
+                    {% for opportunity in recommended_opportunities %}
+                        <li>{{ opportunity.title }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No recommended opportunities at this time.</li>
+                {% endif %}
             </ul>
         </aside>
 
-        <!-- Current Opportunities Section -->
+        <!-- Available Opportunities -->
         <main class="opportunities">
             <h1>Available Opportunities</h1>
-
             <div class="opportunity-list">
-                {% for opportunity in general_opportunities %}
-                <div class="opportunity-item">
-                    <!-- Opportunity Index Number -->
-                    <span class="opportunity-index">{{ loop.index }}.</span> <!-- Numbering added here -->
-                    <a href="{{ url_for('opportunity_detail', opportunity_id=opportunity.opportunity_id) }}">
-                        <h3>{{ opportunity.title }}</h3>
-                        <p class="organization"><strong>Organization:</strong> {{ opportunity.organization_name }}</p>
-                        <p class="dates"><strong>Dates:</strong> {{ opportunity.start_date }} - {{ opportunity.end_date }}</p>
-                    </a>
-                </div>
-                {% endfor %}
+                {% if general_opportunities %}
+                    {% for opportunity in general_opportunities %}
+                        <div class="opportunity-item">
+                            <span class="opportunity-index">{{ loop.index }}.</span>
+                            <a href="{{ url_for('opportunity_detail', opportunity_id=opportunity.opportunity_id) }}">
+                                <h3>{{ opportunity.title }}</h3>
+                                <p class="organization"><strong>Organization:</strong> {{ opportunity.organization_name }}</p>
+                                <p class="dates"><strong>Dates:</strong> {{ opportunity.start_date }} - {{ opportunity.end_date }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No opportunities found. Try adjusting your filters.</p>
+                {% endif %}
             </div>
 
-            <!-- Pagination Controls -->
+            <!-- Pagination -->
             <div class="pagination-controls">
-                <button class="pagination-button" 
-                        {% if page <= 1 %}disabled{% endif %}
-                        onclick="changePage({{ page - 1 }})">
+                <button 
+                    class="pagination-button" 
+                    onclick="changePage({{ page - 1 }})" 
+                    {% if page <= 1 %}disabled{% endif %}
+                >
                     &laquo; Previous
                 </button>
-                <span class="pagination-info">
-                    Page {{ page }} of {{ total_pages }}
-                </span>
-                <button class="pagination-button" 
-                        {% if page >= total_pages %}disabled{% endif %}
-                        onclick="changePage({{ page + 1 }})">
+                <span class="pagination-info">Page {{ page }} of {{ total_pages }}</span>
+                <button 
+                    class="pagination-button" 
+                    onclick="changePage({{ page + 1 }})" 
+                    {% if page >= total_pages %}disabled{% endif %}
+                >
                     Next &raquo;
                 </button>
-            </div>  
+            </div>
         </main>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // Pagination control logic
-        function changePage(newPage) {
-            const urlParams = new URLSearchParams(window.location.search);
-            urlParams.set('page', newPage);  // Update the page parameter
-            window.location.search = urlParams.toString();  // Redirect with updated query string
-        }
-
-        // Logic for clearing filters
-        $('#clear-filters').click(function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            urlParams.delete('location');  // Remove location filter
-            urlParams.delete('category');  // Remove category filter
-            urlParams.delete('skills');    // Remove skills filter
-            urlParams.set('page', 1);      // Reset to the first page
-            window.location.search = urlParams.toString();  // Redirect with updated query string
-        });
-
-        $(document).ready(function () {
-            const dropdownMenu = $('#category-menu');
-            const loadOffset = 5; // Number of items already loaded
-            let isLoading = false;
-
-            // Show/Hide Dropdown Menu
-            $('#category-dropdown').on('click', function () {
-                dropdownMenu.toggle();
-            });
-
-            // Infinite Scroll Logic
-            dropdownMenu.on('scroll', function () {
-                const scrollTop = dropdownMenu.scrollTop();
-                const scrollHeight = dropdownMenu.prop('scrollHeight');
-                const offsetHeight = dropdownMenu.innerHeight();
-                const isBottom = scrollTop + offsetHeight >= scrollHeight - 10;
-
-                if (isBottom && !isLoading) {
-                    isLoading = true;
-
-                    const currentOffset = dropdownMenu.children().length; // Number of items already rendered
-                    $.get(`/categories?offset=${currentOffset}&limit=${loadOffset}`, function (data) {
-                        if (data.categories.length > 0) {
-                            data.categories.forEach(category => {
-                                dropdownMenu.append(
-                                    `<li class="dropdown-item" data-value="${category}">${category}</li>`
-                                );
-                            });
-
-                            isLoading = false; // Reset loading state
-                        } else {
-                            // No more categories to load
-                            isLoading = true; // Stop further requests
-                        }
-                    }).fail(function () {
-                        alert('Error loading categories.');
-                        isLoading = false; // Reset loading state
-                    });
-                }
-            });
-
-            // Category Selection Logic
-            $(document).on('click', '.dropdown-item', function () {
-                $(this).toggleClass('selected');
-            });
-        });
-    </script>
-
+    <script src="{{ url_for('static', filename='js/opportunities.js') }}"></script>
 </body>
 </html>
