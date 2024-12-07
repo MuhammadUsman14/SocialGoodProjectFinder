@@ -1,12 +1,10 @@
 /* General Styles */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #FF6B6B, #F86E6E);
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
     color: #333;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 /* Navbar Styles */
@@ -14,171 +12,202 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 30px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-left .nav-logo {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
-    color: #FF6B6B;
+    color: #007bff;
     text-decoration: none;
 }
 
 .nav-right .nav-link {
-    margin-left: 15px;
+    margin-left: 20px;
     color: #333;
     text-decoration: none;
-    font-size: 14px;
-    padding: 5px 10px;
+    font-size: 16px;
+    padding: 8px 15px;
     border-radius: 5px;
     transition: background 0.3s, color 0.3s;
 }
 
 .nav-right .nav-link:hover {
-    background-color: #FF6B6B;
-    color: #fff;
+    background-color: #007bff;
+    color: #ffffff;
 }
 
 .nav-right .active {
-    background-color: #FF6B6B;
-    color: #fff;
+    background-color: #007bff;
+    color: #ffffff;
 }
 
-/* Container */
-.container {
-    flex: 1;
+/* Main Content Layout */
+.main-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
 }
 
-.form-wrapper {
-    background-color: #fff;
-    width: 100%;
-    max-width: 400px;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
+/* Left Side: Instructions */
+.instructions {
+    flex: 1;
 }
 
-/* Typography */
-h1 {
-    font-size: 28px;
+.header-text {
+    font-size: 36px;
+    font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    line-height: 1.3;
 }
 
-p {
-    font-size: 14px;
-    color: #777;
+.description {
+    font-size: 16px;
+    color: #666;
     margin-bottom: 20px;
 }
 
-/* Form Styles */
-form {
-    text-align: left;
+.steps {
+    margin-top: 20px;
 }
 
-label {
+.step-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* Right Side: Form */
+.form-wrapper {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+form label {
     display: block;
     font-size: 14px;
+    font-weight: bold;
     margin-bottom: 5px;
     color: #555;
 }
 
-input {
+form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus {
-    border-color: #FF6B6B;
+form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     outline: none;
 }
 
-button {
+.password-strength {
+    font-size: 14px;
+    color: #dc3545; /* Default: Weak */
+    margin-bottom: 10px;
+}
+
+form button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
-    color: #fff;
-    background-color: #FF6B6B;
+    color: #ffffff;
+    background-color: #007bff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
     transition: background 0.3s;
 }
 
-button:hover {
-    background-color: #F86E6E;
+form button:hover {
+    background-color: #0056b3;
 }
 
-/* Divider */
-.or-divider {
-    margin: 20px 0;
-    font-size: 12px;
-    color: #aaa;
-    text-align: center;
-    position: relative;
+form a {
+    color: #007bff;
+    text-decoration: none;
 }
 
-.or-divider::before,
-.or-divider::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background: #ddd;
+form a:hover {
+    text-decoration: underline;
 }
 
-.or-divider::before {
-    left: 0;
-}
-
-.or-divider::after {
-    right: 0;
-}
-
-/* Social Buttons */
-.social-buttons {
+/* Phone Number Section */
+.phone-input {
     display: flex;
-    gap: 10px;
-    margin: 10px 0;
+    gap: 0; /* No space between the elements */
+    align-items: center; /* Vertically center the elements */
 }
 
-.social-btn {
-    flex: 1;
-    background-color: #f5f5f5;
+.phone-input select,
+.phone-input input {
+    padding: 12px 15px; /* Same padding as the Full Name input */
+    font-size: 14px; /* Same font size as the Full Name input */
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 10px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.3s;
+    height: 50px; /* Same height as the Full Name input */
+    width: 100%; /* Make it fill the container */
+    max-width: 100%; /* Avoid overflow */
 }
 
-.social-btn:hover {
-    background-color: #e8e8e8;
+.phone-input input {
+    flex-grow: 1; /* Allow the phone number input to take up the remaining space */
 }
 
-/* Links */
-a {
-    color: #FF6B6B;
-    text-decoration: none;
-    font-weight: bold;
+.phone-input select {
+    width: 120px; /* Adjust this width for the dropdown to make it match the Full Name input width */
+    font-size: 12px; /* Reduced font size for better alignment */
 }
 
-a:hover {
-    text-decoration: underline;
+/* Additional Tweaks */
+form input[type="tel"] {
+    height: 50px; /* Ensure the phone number input height is the same as full name input */
+    padding: 12px 15px; /* Adjust padding to match full name input */
+}
+
+.phone-input select,
+.phone-input input {
+    font-size: 14px; /* Ensures uniform font size */
+    line-height: 20px; /* Ensures alignment with text */
 }

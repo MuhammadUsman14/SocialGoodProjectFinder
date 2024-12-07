@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/signup.css">
-    <title>Sign Up</title>
+    <title>Sign Up</title>  
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -19,29 +19,53 @@
         </div>
     </nav>
 
-    <div class="container">
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Side: Instructions -->
+        <div class="instructions">
+            <h1 class="header-text">You can start making the World better in 2 simple steps.</h1>
+            <p class="description">We vet all of our volunteers in order to create the most rewarding experience for our community. After completing the steps below, you’ll be ready to volunteer for all projects moving forward.</p>
+            <div class="steps">
+                <div class="step-item">
+                    <div class="step-circle">01</div>
+                    <p>Register your account (this step)</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">02</div>
+                    <p>Complete your volunteer profile information</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Signup Form -->
         <div class="form-wrapper">
-            <h1>Create Your Account</h1>
-            <p>Join us to connect with volunteer opportunities!</p>
-            <form id="signupForm">
+            <h2>Create Your Account</h2>
+            <form id="signupForm" method="POST" action="/signup">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                
+                <label for="phone">Phone Number</label>
+                <div class="phone-input">
+                    <select id="countryCode" name="countryCode" required>
+                        <option value="+1">+1 (USA)</option>
+                        <option value="+44">+44 (UK)</option>
+                        <option value="+91">+91 (India)</option>
+                        <option value="+61">+61 (Australia)</option>
+                        <option value="+49">+49 (Germany)</option>
+                        <option value="+33">+33 (France)</option>
+                        <option value="+81">+81 (Japan)</option>
+                    </select>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 
-                <label for="mobile">Mobile Number</label>
-                <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
-                
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                
-                <div class="form-options">
-                    <label>
-                        <input type="checkbox" id="terms" required> I agree to the terms and conditions
-                    </label>
-                </div>
-                
+
                 <button type="submit" id="signupButton">Sign Up</button>
             </form>
-            
             <p>Already have an account? <a href="/login" id="loginLink">Login</a></p>
         </div>
     </div>

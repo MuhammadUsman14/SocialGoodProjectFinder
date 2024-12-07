@@ -6,14 +6,14 @@ from datetime import datetime
 from geopy.geocoders import Nominatim
 
 app = Flask(__name__)
-app.secret_key = ''  # Replace with a secure secret key for sessions
+app.secret_key = '3683a25f2a44fc627f33d91ec7cd654151f8696a6fffd057'  # Replace with a secure secret key for sessions
 
 # Function to establish a connection to the database
 def connect_db():
     return mysql.connector.connect(
         host="localhost",  # e.g., localhost or IP
         user="root",   # MySQL username
-        password="",  # MySQL password
+        password="@MySeniorProJecT21",  # MySQL password
         database="social_good"  # Database name
     )
 
@@ -31,7 +31,7 @@ def email_exists(email):
 
 
 # Function to create a new user and store it in the database
-def create_user(full_name, email, password):
+def create_user(full_name, email, password, mobile_number):
     if email_exists(email):
         return "Error: Email already registered."  # Error if email is already registered
     
@@ -48,8 +48,8 @@ def create_user(full_name, email, password):
     try:
         # Insert the user's data into the Users table
         cursor.execute(
-            "INSERT INTO Users (first_name, last_name, email, password_hash) VALUES (%s, %s, %s, %s)",
-            (first_name, last_name, email, hashed_password)
+            "INSERT INTO Users (first_name, last_name, email, password_hash, mobile_number) VALUES (%s, %s, %s, %s, %s)",
+            (first_name, last_name, email, hashed_password, mobile_number)
         )
         db.commit()  # Commit the transaction
         print(f"User {first_name} {last_name} inserted into the database.")
@@ -643,6 +643,7 @@ def fetch_opportunities(location=None, category=None, skills=None, offset=0, lim
 def fetch_opportunity_details(opportunity_id):
     db = connect_db()
     cursor = db.cursor(dictionary=True)
+    
     
     query = """
         SELECT O.organization_id, O.name AS organization_name, V.opportunity_id, V.title, V.description AS role_description, V.category, V.required_skills, V.location_address,  

@@ -3,43 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/login.css">
-    <title>Login</title>
+    <title>Log in | Social Good</title> <!-- Updated browser tab title -->
+    <link rel="stylesheet" href="/static/css/login.css"> <!-- Link to external CSS -->
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- Navigation Bar with only Logo -->
     <nav class="navbar">
         <div class="navbar-logo">
-            <a href="/">Social Good Project Finder</a>
+            <a href="/" class="logo-text">Social Good Project Finder</a>
         </div>
-        <ul class="navbar-links">
-            <li><a href="/signup" id="navbar-signup">Sign Up</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-
-        </ul>
     </nav>
 
-    <!-- Login Form Container -->
-    <div class="container">
-        <div class="form-wrapper">
-            <h1>Welcome Back! 👋</h1>
-            <p>Hello again, you've been missed!</p>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Section: Title, Testimonial -->
+        <div class="left-section">
+            <h1 class="login-title">Login to your account</h1> <!-- Changed font here -->
+            <p class="register-text">Don’t have an account? <a href="/signup" class="register-link">Please Register.</a></p>
+            <div class="testimonial">
+                <div class="testimonial-box">
+                    <h3>Sanam, Team Leader since 2013</h3>
+                    <p>Bronx 🦁</p>
+                    <blockquote>
+                        I constantly learn about the city, the people, and myself through various opportunities to make a contribution.
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section: Login Form -->
+        <div class="right-section">
             <form id="loginForm">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                
                 <div class="form-options">
-                    <label><input type="checkbox" id="rememberMe"> Remember Me</label>
+                    <label class="remember-me-label">
+                        <input type="checkbox" id="rememberMe"> Remember Me
+                    </label>
                     <a href="#" id="forgotPassword">Forgot Password?</a>
                 </div>
-                <button type="submit" id="loginButton">Login</button>
+
+                <button type="submit" id="loginButton">Log In</button>
             </form>
-            <div class="social-buttons">
-            </div>
-            <p>Don’t have an account? <a href="/" id="signupLink">Sign Up</a></p>
         </div>
     </div>
+
     <script src="/static/js/login.js"></script>
 </body>
 </html>

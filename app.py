@@ -26,12 +26,15 @@ def signup():
         full_name = request.form['full_name']
         email = request.form['email']
         password = request.form['password']
+        country_code = request.form['countryCode']
+        phone_number = request.form['phone']
+        mobile_number = f"{country_code}{phone_number}"  # Combine country code and phone number
 
         # Print out the user input to the terminal
-        print(f"User signed up with Full Name: {full_name}, Email: {email}")
+        print(f"User signed up with Full Name: {full_name}, Email: {email}, Mobile Number: {mobile_number}")
 
         # Call the create_user function from auth.py to insert the user into the database
-        error = create_user(full_name, email, password)
+        error = create_user(full_name, email, password, mobile_number)
         
         if error:
             flash(f"Error: {error}", 'danger')
@@ -57,12 +60,13 @@ def login():
             session['user_email'] = email  # Save the email to session
             session['user_id'] = user_id  # Save the user ID to session
             flash('Login successful! Welcome back.', 'success')
-            return redirect(url_for('profile_setup'))  # Redirect to the profile setup page on successful login
+            return redirect(url_for('profile_setup'))  # Redirect to profile_setup after successful login
         else:
             flash('Invalid email or password. Please try again.', 'danger')  # Show error if login fails
             return redirect(url_for('login'))  # Stay on the login page if credentials are incorrect
-    # If GET request, render the login page
-    return render_template('login.html')  # Render the login form
+    return render_template('login.html')  # Render the login form if it's a GET request
+
+
 
 
 # Skills API Route for AJAX pagination
