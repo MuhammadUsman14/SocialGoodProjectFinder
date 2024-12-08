@@ -1,113 +1,156 @@
 /* Global Styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Unified font */
     margin: 0;
-    background-color: #f4f6f9;
+    background-color: rgba(34, 34, 34, 1); /* Unified dark background */
+    color: #ffffff; /* Unified text color */
 }
 
 /* Navigation Bar Styles */
 .navbar {
-    background-color: #2c3e50; /* Dark background */
-    padding: 15px 20px; /* Add padding for better spacing */
-    position: sticky; /* Make navbar stick to the top on scroll */
+    display: flex; /* Align elements in a row */
+    justify-content: space-between; /* Separate left and right sections */
+    align-items: center; /* Vertically align elements */
+    background-color: rgba(34, 34, 34, 0.95); /* Unified navbar background */
+    color: white;
+    padding: 15px 30px; /* Consistent padding */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Consistent border */
+    position: sticky; /* Keeps navbar fixed at the top */
     top: 0;
-    z-index: 1000; /* Ensure it stays above other content */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow */
 }
 
-.navbar-container {
-    display: flex;
-    justify-content: space-between; /* Spread logo and links */
-    align-items: center; /* Center align items vertically */
-    max-width: 1200px; /* Limit width for better aesthetics */
-    margin: 0 auto; /* Center align the navbar container */
-}
-
-.navbar-logo .logo {
-    font-size: 1.5em; /* Slightly larger font for the logo */
-    font-weight: bold; /* Bold to emphasize branding */
-    color: #ecf0f1; /* Light font color */
+.nav-logo .logo {
+    font-size: 26px; /* Unified font size for logo */
+    font-weight: bold;
+    color: #3CB371; /* Unified primary color */
     text-decoration: none; /* Remove underline */
     transition: color 0.3s ease; /* Smooth hover effect */
 }
 
-.navbar-logo .logo:hover {
-    color: #f39c12; /* Highlight color on hover */
+.nav-logo:hover {
+    color: #2E8B57; /* Slightly darker green on hover */
 }
 
-.navbar-links {
+.nav-links {
     display: flex; /* Align links in a row */
-    list-style: none; /* Remove default bullet points */
-    padding: 0; /* Reset padding */
-    margin: 0; /* Reset margin */
-    gap: 15px; /* Space between links */
+    list-style: none; /* Remove bullets */
+    gap: 20px; /* Space between links */
+    margin: 0;
+    padding: 0;
 }
 
-.navbar-links .nav-link {
-    color: #ecf0f1; /* Light font color */
-    font-size: 1em; /* Consistent font size */
+.nav-links .nav-link {
+    color: #ffffff; /* Unified text color */
+    font-size: 16px; /* Consistent font size */
     text-decoration: none; /* Remove underline */
-    padding: 8px 12px; /* Add padding for clickable area */
-    border-radius: 5px; /* Smooth corners */
+    padding: 8px 15px; /* Add padding for better click area */
+    border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
 }
 
-.navbar-links .nav-link:hover {
-    background-color: #34495e; /* Subtle background on hover */
-    color: #f39c12; /* Highlight text color on hover */
+.nav-links .nav-link:hover {
+    background-color: #3CB371; /* Unified hover background color */
+    color: #ffffff;
 }
 
-.navbar-links .active {
-    background-color: #f39c12; /* Highlight active page */
-    color: #2c3e50; /* Contrast text color */
-    font-weight: bold; /* Bold to indicate current page */
+.nav-links .active {
+    background-color: #3CB371; /* Highlight active page */
+    color: #ffffff; /* Ensure active text is readable */
+    font-weight: bold; /* Emphasize active link */
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    .navbar-container {
-        flex-direction: column; /* Stack logo and links vertically */
-        align-items: flex-start; /* Align items to the left */
-    }
-    .navbar-links {
-        flex-direction: column; /* Stack links vertically */
-        gap: 10px; /* Reduce gap for better fit */
-    }
+/* Filters Container */
+.filters-container {
+    background-color: rgba(34, 34, 34, 0.9); /* Darker background */
+    padding: 20px 30px; /* Spacious padding */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow */
 }
 
+/* Filters Group */
+.filter-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px; /* Space between filter items */
+    justify-content: space-between;
+}
+
+/* Filter Items */
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(33.33% - 20px); /* Adjust width for layout */
+    min-width: 200px; /* Ensure a minimum width */
+}
+
+.filter-label {
+    font-size: 14px; /* Unified label size */
+    color: #dcdcdc; /* Secondary text color */
+    margin-bottom: 10px; /* Space below label */
+}
+
+/* Input Styles */
+.filters-container input,
+.filters-container .dropdown-toggle {
+    padding: 15px; /* Add padding for spaciousness */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Unified border color */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 16px; /* Consistent font size */
+    background-color: rgba(34, 34, 34, 0.8); /* Slightly darker input background */
+    color: #ffffff; /* Unified input text color */
+    transition: all 0.3s ease; /* Smooth hover/focus effects */
+}
+
+.filters-container input:focus,
+.filters-container .dropdown-toggle:hover {
+    border-color: #3CB371; /* Highlight border on hover/focus */
+    box-shadow: 0 0 8px rgba(60, 179, 113, 0.5); /* Add glow */
+    outline: none; /* Remove default outline */
+}
 
 /* Dropdown Menu */
-.category-dropdown {
-    position: relative;
-}
-
 .dropdown-menu {
     display: none;
     position: absolute;
-    background: white;
-    border: 1px solid #ccc;
+    background-color: rgba(34, 34, 34, 0.9); /* Match container background */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Unified border */
+    border-radius: 10px; /* Rounded corners */
     width: 100%;
     max-height: 200px;
     overflow-y: auto;
-    border-radius: 5px;
-    z-index: 10;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add shadow */
 }
 
 .dropdown-item {
-    padding: 10px;
+    padding: 15px;
+    font-size: 14px; /* Consistent font size */
+    color: #ffffff; /* Text color */
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dropdown-item:hover {
-    background-color: #3498db;
-    color: white;
+    background-color: #3CB371; /* Highlight on hover */
+    color: #ffffff;
 }
 
 /* Main Content */
 .container {
     display: flex;
     justify-content: space-between;
+    padding: 40px 30px; /* Add padding for spacious layout */
+    gap: 30px; /* Add space between content sections */
+}
+
+.recommended,
+.opportunities {
+    background-color: rgba(34, 34, 34, 0.9); /* Dark background */
     padding: 20px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add shadow */
 }
 
 .recommended {
@@ -119,146 +162,84 @@ body {
 }
 
 .opportunity-item {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95); /* Light background for cards */
+    padding: 25px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
     margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.opportunity-item:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Deepen shadow */
 }
 
 .opportunity-item h3 {
     margin: 0 0 10px;
-    color: #1A3C6C;
+    color: #3CB371; /* Green for headers */
+    font-size: 20px;
 }
 
-.opportunity-item h3:hover {
-    color: #f1c40f;
+.opportunity-item p {
+    margin: 0;
+    color: #555; /* Neutral text color */
+    font-size: 16px;
+    line-height: 1.5;
 }
 
-.pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.opportunity-item a {
+    color: #3CB371; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
-/* Filters Container */
-.filters-container {
-    background-color: #ecf0f1; /* Light background */
-    padding: 15px 20px; /* Add spacing */
-    border-bottom: 1px solid #bdc3c7; /* Subtle border for separation */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
-}
-
-/* Filters Group */
-.filter-group {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    justify-content: space-between; /* Spread out items */
-    gap: 15px; /* Space between filter items */
-}
-
-/* Filter Items */
-.filter-item {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 calc(33.33% - 15px); /* Take up equal width, minus gap */
-    min-width: 200px; /* Ensure a minimum width */
-}
-
-.filter-label {
-    font-size: 0.9em; /* Slightly smaller text */
-    color: #2c3e50; /* Dark text for readability */
-    margin-bottom: 5px; /* Space between label and input */
-}
-
-/* Input Styles */
-.filters-container input,
-.filters-container .dropdown-toggle {
-    padding: 10px 15px;
-    border: 1px solid #bdc3c7; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 1em; /* Consistent font size */
-    background-color: white;
-    color: #34495e; /* Neutral dark text */
-    transition: all 0.3s ease; /* Smooth hover/focus effects */
-}
-
-.filters-container input:focus,
-.filters-container .dropdown-toggle:hover {
-    border-color: #3498db; /* Highlight border on hover/focus */
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Subtle glow */
-    outline: none; /* Remove default outline */
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-}
-
-.dropdown-item {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background-color: #3498db;
-    color: white;
+.opportunity-item a:hover {
+    color: #2E8B57; /* Darker green on hover */
 }
 
 /* Buttons */
-.filter-buttons {
-    display: flex;
-    gap: 15px; /* Space between buttons */
-    justify-content: flex-end; /* Align buttons to the right */
-    margin-top: 10px; /* Space above buttons */
-}
-
 .apply-button,
 .clear-button {
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 1em;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 16px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .apply-button {
-    background-color: #2ecc71; /* Green for apply */
-    color: white;
+    background-color: #3CB371; /* Green for apply */
+    color: #ffffff;
 }
 
 .apply-button:hover {
-    background-color: #27ae60; /* Darker green on hover */
+    background-color: #2E8B57; /* Darker green on hover */
 }
 
 .clear-button {
-    background-color: #e74c3c; /* Red for clear */
+    background-color: #E74C3C; /* Red for clear */
     color: white;
 }
 
 .clear-button:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #C0392B; /* Darker red on hover */
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     .filter-group {
-        flex-direction: column; /* Stack filters vertically on smaller screens */
+        flex-direction: column; /* Stack filters vertically */
     }
 
     .filter-buttons {
-        justify-content: center; /* Center buttons on smaller screens */
+        justify-content: center; /* Center buttons */
+    }
+
+    .container {
+        flex-direction: column; /* Stack sections */
+        gap: 20px;
     }
 }

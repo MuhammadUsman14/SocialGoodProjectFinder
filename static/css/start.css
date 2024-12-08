@@ -2,8 +2,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    color: white;
+    font-family: 'Roboto', sans-serif; /* Unified font for consistency */
+    color: #ffffff; /* Consistent text color */
     overflow-x: hidden;
 }
 
@@ -12,7 +12,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(34, 34, 34, 0.95); /* Unified dark background for navbar */
     position: fixed;
     width: 100%;
     z-index: 10;
@@ -22,7 +22,7 @@ body {
 .nav-logo {
     font-size: 24px;
     font-weight: bold;
-    color: white;
+    color: #ffffff; /* Consistent white text color */
 }
 
 .nav-links {
@@ -33,7 +33,7 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: white;
+    color: #ffffff; /* Consistent link text color */
     font-size: 16px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -41,7 +41,7 @@ body {
 }
 
 .nav-links a:hover {
-    background-color: #68D391;
+    background-color: #3CB371; /* Hover color unified */
 }
 
 .hero-section {
@@ -111,12 +111,14 @@ body {
     font-size: 48px;
     margin-bottom: 10px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    color: #ffffff; /* Unified text color */
 }
 
 .hero-content p {
     font-size: 20px;
     margin-bottom: 20px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    color: #dcdcdc; /* Slightly lighter shade for paragraph text */
 }
 
 button {
@@ -124,14 +126,14 @@ button {
     font-size: 18px;
     border: none;
     border-radius: 5px;
-    background-color: #68D391;
-    color: white;
+    background-color: #3CB371; /* Unified button background color */
+    color: #ffffff; /* Consistent button text color */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #48BB78;
+    background-color: #2E8B57; /* Unified button hover color */
 }
 
 /* Ensure responsiveness for smaller screens */

@@ -14,9 +14,43 @@ def home():
 def contact():
     return render_template('contact.html')
 
-@app.route('/exploreopportunities')
+@app.route('/exploreopportunities', methods=['GET'])
 def explore_opportunities():
-    return render_template('exploreopportunities.html')
+    # Fetch query parameters
+    search = request.args.get('search', '').strip()
+    category = request.args.get('category', '').strip()
+    location = request.args.get('location', '').strip()
+    skills = request.args.get('skills', '').strip()
+
+    # Limit the number of opportunities to 5 for non-logged-in users
+    limit = 5
+    user_id = session.get('user_id', None)  # Check if the user is logged in
+
+    try:
+        # Fetch opportunities from the database based on filters
+        general_opportunities = fetch_opportunities(
+            location=location or None,
+            category=category or None,
+            skills=[skill.strip() for skill in skills.split(',') if skill.strip()] if skills else None,
+            offset=0,
+            limit=limit
+        )
+
+        # Check if more opportunities are available
+        total_opportunities = fetch_total_opportunities()
+        more_opportunities_available = total_opportunities > limit
+
+        return render_template(
+            'exploreopportunities.html',
+            general_opportunities=general_opportunities,
+            more_opportunities_available=more_opportunities_available,
+            user_logged_in=bool(user_id)
+        )
+
+    except Exception as e:
+        print(f"Error in explore_opportunities: {e}")
+        return jsonify({'error': 'Unable to fetch opportunities. Please try again later.'}), 500
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

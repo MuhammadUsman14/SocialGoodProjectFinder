@@ -2,54 +2,71 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f9fc;
-    color: #333;
+    font-family: 'Roboto', sans-serif; /* Unified font */
+    background-color: rgba(34, 34, 34, 1); /* Unified dark background */
+    color: #ffffff; /* Unified text color */
 }
 
+/* Navbar Styles */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: fixed;
+    padding: 15px 30px; /* Unified padding */
+    background-color: rgba(34, 34, 34, 0.95); /* Unified navbar background */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: fixed; /* Keeps navbar fixed at the top */
+    top: 0;
     width: 100%;
-    z-index: 10;
+    z-index: 1000; /* Stays above other elements */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Navbar shadow */
     box-sizing: border-box;
 }
 
 .nav-logo a {
     text-decoration: none;
-    color: white;
-    font-size: 24px;
+    color: #3CB371; /* Unified primary color for logo */
+    font-size: 26px;
     font-weight: bold;
 }
 
 .nav-links {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap; /* Wrap links to prevent overflow */
 }
 
 .nav-links a {
     text-decoration: none;
-    color: white;
+    color: #ffffff; /* Unified text color for links */
     font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Prevents links from wrapping unnecessarily */
 }
 
 .nav-links a:hover {
-    color: #68D391;
+    background-color: #3CB371; /* Unified hover background color */
+    color: #ffffff;
 }
 
+.nav-links a.active {
+    background-color: #3CB371; /* Highlight active link */
+}
+
+/* Contact Container */
 .contact-container {
-    padding-top: 80px; /* Offset for navbar */
+    padding-top: 100px; /* Offset for fixed navbar */
     text-align: center;
-    margin: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* Set a max width for layout consistency */
 }
 
 h1 {
     font-size: 36px;
     margin-bottom: 30px;
+    color: #ffffff; /* Unified header text color */
 }
 
 .team {
@@ -60,30 +77,34 @@ h1 {
 }
 
 .team-member {
-    background: white;
+    background: rgba(34, 34, 34, 0.9); /* Unified background color */
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Adjusted shadow for consistency */
     text-align: center;
     padding: 20px;
     width: 250px;
+    color: #dcdcdc; /* Unified light gray for text */
 }
 
 .team-member img {
-    width: 250px;
-    height: 250px;
-    border-radius: 80%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular images */
     margin-bottom: 18px;
+    object-fit: cover;
+    border: 2px solid #3CB371; /* Border color for consistency */
 }
 
 .team-member h3 {
     margin: 10px 0 5px;
     font-size: 18px;
+    color: #ffffff; /* Unified text color */
 }
 
 .team-member p {
     margin: 5px 0 10px;
     font-size: 14px;
-    color: #666;
+    color: #dcdcdc; /* Unified light gray for secondary text */
 }
 
 .social-icons {
@@ -96,6 +117,7 @@ h1 {
     width: 24px;
     height: 24px;
     cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
 .social-icons img:hover {

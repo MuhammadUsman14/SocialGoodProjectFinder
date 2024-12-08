@@ -1,131 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate to Organization</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom, #a2c2e8, #f0f4f8);
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #4a90e2;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            color: #333;
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        input, textarea, button, select {
-            padding: 12px;
-            font-size: 1rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            margin-bottom: 15px;
-            outline: none;
-            transition: border 0.3s ease;
-        }
-
-        input[type="number"], textarea {
-            width: 100%;
-        }
-
-        input[type="number"]:focus, textarea:focus {
-            border-color: #4a90e2;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        select {
-            padding: 12px;
-            font-size: 1rem;
-            border-radius: 8px;
-            background-color: #f7f7f7;
-        }
-
-        button {
-            background-color: #4a90e2;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            padding: 14px;
-            font-size: 1.2rem;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #357abd;
-        }
-
-        .note {
-            font-size: 0.9rem;
-            color: #555;
-            text-align: center;
-        }
-
-        .note a {
-            color: #4a90e2;
-            text-decoration: none;
-        }
-
-        .note a:hover {
-            text-decoration: underline;
-        }
-
-        .form-header {
-            background-color: #f0f4f8;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .form-header h3 {
-            font-size: 1.3rem;
-            margin: 0;
-            color: #4a90e2;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/donate.css') }}">
 </head>
-
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="/" class="logo">Social Good Project Finder</a>
+        </div>
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/opportunities" class="nav-link">Opportunities</a>
+            <a href="/profile_setup" class="nav-link">Profile</a>
+            <a href="/logout" class="nav-link">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Donation Form -->
     <div class="container">
         <div class="form-header">
             <h3>Your Contribution Helps!</h3>
@@ -150,7 +45,7 @@
                 <textarea id="purpose" name="purpose" placeholder="Enter your message or purpose for this donation (optional)"></textarea>
             </div>
 
-            <!-- Payment Method (Optional) -->
+            <!-- Payment Method -->
             <div class="form-group">
                 <label for="payment-method">Payment Method:</label>
                 <select id="payment-method" name="payment_method" required>
@@ -165,6 +60,7 @@
             <p class="note">By clicking "Donate Now", you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.</p>
         </form>
     </div>
-</body>
 
+    <script src="{{ url_for('static', filename='js/donate.js') }}"></script>
+</body>
 </html>

@@ -1,0 +1,188 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Unified font */
+    background-color: rgba(34, 34, 34, 1); /* Unified dark background */
+    color: #ffffff; /* Unified text color */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Main Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Align left and right sections */
+    align-items: center;
+    background-color: rgba(34, 34, 34, 0.95); /* Unified navbar background */
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.nav-logo .logo {
+    font-size: 26px; /* Unified font size for logo */
+    font-weight: bold;
+    color: #3CB371; /* Unified primary color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.nav-logo:hover {
+    color: #2E8B57; /* Darker green on hover */
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px; /* Space between links */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links .nav-link {
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links .nav-link:hover {
+    background-color: #3CB371; /* Highlight hover */
+    color: #ffffff;
+}
+
+.nav-links .active {
+    background-color: #3CB371; /* Highlight active page */
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* User Info Section */
+.user-info {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    background: #2e2e2e; /* Darker background for cards */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.profile-picture-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.profile-picture-section img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid #3CB371; /* Green border for profile picture */
+}
+
+.profile-picture-section .social-icons a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff; /* Unified icon color */
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.profile-picture-section .social-icons a:hover {
+    color: #3CB371; /* Highlight hover */
+}
+
+.contact-info,
+.history {
+    flex: 1;
+}
+
+.contact-info h3,
+.history h3,
+.most-recent h3,
+.next-shift h3 {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #ffffff; /* Unified header text color */
+}
+
+.contact-info p,
+.contact-info ul li,
+.history p,
+.next-shift p {
+    font-size: 14px;
+    color: #dcdcdc; /* Subtle text color */
+    margin: 5px 0;
+}
+
+.most-recent ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.most-recent ul li {
+    margin-bottom: 5px;
+}
+
+.charts-section {
+    margin-top: 30px;
+    background: #2e2e2e; /* Darker background for cards */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.charts-section h2 {
+    margin-bottom: 20px;
+    color: #ffffff; /* Unified header text color */
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.chart-legend span {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.chart-legend .hours {
+    color: #36a2eb; /* Blue for hours */
+}
+
+.chart-legend .donations {
+    color: #ff9f40; /* Orange for donations */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .user-info {
+        flex-direction: column; /* Stack user info vertically */
+    }
+
+    .charts-section {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}

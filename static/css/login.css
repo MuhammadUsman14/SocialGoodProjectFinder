@@ -1,55 +1,81 @@
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Unified font */
     margin: 0;
     padding: 0;
-    background-color: #f0f4f8; /* Light, clean background color */
-    color: #333;
+    background-color: rgba(34, 34, 34, 1); /* Dark background */
+    color: #ffffff; /* Unified text color */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-/* Navigation Bar Styles (Only Logo) */
+/* Navigation Bar Styles */
 .navbar {
-    width: 100%;
-    background-color: #ffffff;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px 30px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
+    padding: 15px 20px; /* Reduced padding for better fit */
+    background-color: rgba(34, 34, 34, 0.95); /* Unified navbar background */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: fixed; /* Ensures navbar stays at the top */
+    top: 0; /* Aligns the navbar to the top of the page */
     left: 0;
-    z-index: 1000;
+    width: 100%; /* Ensures full width */
+    z-index: 1000; /* Places it above other elements */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    overflow: hidden; /* Prevents navbar content from spilling */
 }
 
-.navbar-logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-text {
-    font-size: 25px;
-    font-weight: 800;
-    color: #007BFF;
+.nav-logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #3CB371; /* Unified primary color */
     text-decoration: none;
-    font-family: 'Dancing Script'; /* Decorative cursive font */
-    letter-spacing: 2px;
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.nav-right {
+    display: flex;
+    gap: 10px; /* Spacing between links */
+    flex-wrap: wrap; /* Wrap links to the next line if needed */
+    overflow: hidden; /* Ensure links stay within the navbar */
+}
+
+.nav-link {
+    color: #ffffff; /* Unified link text color */
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px; /* Adjusted padding for better spacing */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Prevents text wrapping in links */
+}
+
+.nav-link:hover {
+    background-color: #3CB371; /* Unified hover background color */
+    color: #ffffff;
+}
+
+.nav-link.active {
+    background-color: #3CB371; /* Highlight active link */
 }
 
 /* Main Container: Flex Layout with Two Sections */
 .main-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 90%;
     max-width: 1200px;
-    padding: 20px;
+    padding: 40px;
     margin-top: 100px; /* Adjusted for fixed navbar */
+    gap: 40px;
+    box-sizing: border-box;
 }
 
 /* Left Section: Title, Testimonial */
@@ -57,26 +83,25 @@ body {
     flex: 1;
     max-width: 450px;
     padding: 30px;
-    color: #333;
+    color: #ffffff; /* Unified text color */
     text-align: left;
 }
 
 h1.login-title {
     font-size: 36px;
-    color: #333;
+    color: #ffffff; /* Unified text color */
     margin-bottom: 15px;
     font-weight: 700;
-    font-family: 'Roboto', sans-serif; /* Updated font for the title */
 }
 
 .register-text {
     font-size: 16px;
-    color: #777;
+    color: #dcdcdc; /* Unified light gray for secondary text */
     margin-bottom: 20px;
 }
 
 .register-link {
-    color: #007BFF;
+    color: #3CB371; /* Unified primary color */
     text-decoration: none;
     font-weight: 600;
 }
@@ -91,31 +116,31 @@ h1.login-title {
 
 .testimonial-box {
     padding: 20px;
-    background-color: #fff;
-    border-left: 5px solid #007BFF;
+    background-color: rgba(34, 34, 34, 0.8); /* Unified box background */
+    border-left: 5px solid #3CB371; /* Unified border color */
     border-radius: 8px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); /* Adjusted shadow */
     margin-top: 20px;
 }
 
 .testimonial-box h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #333;
+    color: #ffffff; /* Unified text color */
     margin-bottom: 10px;
 }
 
 .testimonial-box p {
     font-size: 14px;
-    color: #777;
+    color: #dcdcdc; /* Unified light gray for secondary text */
     margin-bottom: 15px;
 }
 
 .testimonial-box blockquote {
     font-size: 14px;
-    color: #777;
+    color: #dcdcdc; /* Unified light gray for blockquote */
     font-style: italic;
-    border-left: 4px solid #007BFF; /* Blue border */
+    border-left: 4px solid #3CB371; /* Unified border color */
     padding-left: 15px;
 }
 
@@ -123,10 +148,10 @@ h1.login-title {
 .right-section {
     flex: 1;
     max-width: 400px;
-    background-color: #fff;
+    background-color: rgba(34, 34, 34, 0.9); /* Unified form background */
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5); /* Adjusted shadow for consistency */
     text-align: left;
 }
 
@@ -138,7 +163,7 @@ form {
 
 label {
     font-size: 16px;
-    color: #333;
+    color: #dcdcdc; /* Unified label color */
     margin-bottom: 5px;
     font-weight: 600;
 }
@@ -147,15 +172,16 @@ input {
     width: 100%;
     padding: 15px;
     font-size: 16px;
-    border: 2px solid #ddd;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Unified border color */
     border-radius: 8px;
     transition: border-color 0.3s ease;
-    background-color: #f9f9f9;
+    background-color: rgba(34, 34, 34, 0.8); /* Unified input background */
+    color: #ffffff; /* Unified input text color */
     box-sizing: border-box;
 }
 
 input:focus {
-    border-color: #007BFF; /* Blue color focus */
+    border-color: #3CB371; /* Unified focus color */
     outline: none;
 }
 
@@ -164,8 +190,8 @@ button {
     padding: 15px;
     font-size: 18px;
     font-weight: 600;
-    color: white;
-    background-color: #007BFF; /* Blue button */
+    color: #ffffff; /* Unified button text color */
+    background-color: #3CB371; /* Unified button background color */
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -173,7 +199,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #2E8B57; /* Unified button hover color */
 }
 
 /* Form Options (Remember Me, Forgot Password) */
@@ -181,11 +207,11 @@ button:hover {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color: #555;
+    color: #dcdcdc; /* Unified secondary text color */
 }
 
 .form-options a {
-    color: #007BFF;
+    color: #3CB371; /* Unified link color */
     text-decoration: none;
 }
 
@@ -198,7 +224,7 @@ button:hover {
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: #555;
+    color: #dcdcdc; /* Unified secondary text color */
 }
 
 .remember-me-label input {

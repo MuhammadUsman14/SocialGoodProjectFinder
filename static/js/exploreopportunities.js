@@ -1,44 +1,25 @@
-document.getElementById('apply-filters').addEventListener('click', function() {
-    const searchQuery = document.getElementById('search-bar').value;
-    const category = document.getElementById('category').value;
-    const location = document.getElementById('location').value;
-    const skills = document.getElementById('skills').value;
+document.addEventListener('DOMContentLoaded', () => {
+    const filterInputs = document.querySelectorAll('.filter-input');
+    const modal = document.getElementById('login-modal');
+    const closeBtn = document.querySelector('.close-btn');
 
-    fetch('/get-opportunities', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            search: searchQuery,
-            category: category,
-            location: location,
-            skills: skills
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const dashboard = document.getElementById('opportunity-dashboard');
-        dashboard.innerHTML = '';
-        
-        data.forEach(opportunity => {
-            const opportunityCard = document.createElement('div');
-            opportunityCard.classList.add('opportunity-card');
-            
-            opportunityCard.innerHTML = `
-                <h3>${opportunity.title}</h3>
-                <p><strong>Skills:</strong> ${opportunity.skills}</p>
-                <p><strong>Location:</strong> ${opportunity.location}</p>
-                <p><strong>Category:</strong> ${opportunity.category}</p>
-                <p><strong>Description:</strong> ${opportunity.description.substring(0, 100)}...</p>
-                <div class="view-details" onclick="viewDetails('${opportunity.id}')">View Details</div>
-            `;
-            
-            dashboard.appendChild(opportunityCard);
+    // Add click event to filter inputs
+    filterInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            // Show the modal
+            modal.style.display = 'flex';
         });
     });
-});
 
-function viewDetails(opportunityId) {
-    window.location.href = `/opportunity/${opportunityId}`;
-}
+    // Close the modal
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Close modal on clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});

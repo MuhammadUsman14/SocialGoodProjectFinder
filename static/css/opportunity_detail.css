@@ -1,0 +1,160 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(34, 34, 34, 1);
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(34, 34, 34, 0.95);
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.nav-logo .logo {
+    font-size: 26px; /* Unified font size for logo */
+    font-weight: bold;
+    color: #3CB371; /* Unified primary color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+.nav-logo:hover {
+    color: #2E8B57;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #3CB371;
+    color: #ffffff;
+}
+
+.nav-link.active {
+    background-color: #3CB371;
+    font-weight: bold;
+}
+
+.opportunity-container {
+    display: flex;
+    gap: 20px;
+    padding: 40px 30px;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: #2e2e2e;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.left-section, .right-section {
+    background-color: rgba(34, 34, 34, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.left-section {
+    flex: 2;
+}
+
+.right-section {
+    flex: 1;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #3CB371;
+}
+
+.header h3 {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.description p {
+    color: #dcdcdc;
+}
+
+.buttons a button, .buttons form button {
+    background-color: #3CB371;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.buttons a button:hover, .buttons form button:hover {
+    background-color: #2E8B57;
+    transform: scale(1.05);
+}
+
+.cause-areas-list, .skills-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cause-areas-list li, .skills-list li {
+    background-color: #3e3e3e;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.cause-areas-list li:hover, .skills-list li:hover {
+    background-color: #3CB371;
+    color: white;
+}
+.buttons {
+    display: flex; /* Align buttons horizontally */
+    gap: 20px; /* Add space between buttons */
+    margin-top: 20px; /* Add space above the buttons */
+}
+
+.donate-btn,
+.volunteer-btn {
+    background-color: #3CB371;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.donate-btn:hover,
+.volunteer-btn:hover {
+    background-color: #2E8B57;
+    transform: scale(1.05);
+}

@@ -14,17 +14,18 @@
         </div>
         <div class="navbar-right">
             <a href="/login">Log In</a>
-            <a href="/signup">Sign In</a>
+            <a href="/signup">Sign Up</a>
             <a href="/contact">Contact Us</a>
         </div>
     </nav>
 
     <div class="main-container">
+        <!-- Filters Section -->
         <div class="filters">
-            <input type="text" id="search-bar" placeholder="Search for opportunities...">
+            <h2>Filter Opportunities</h2>
             <div class="filter-group">
                 <label for="category">Category:</label>
-                <select id="category">
+                <select id="category" class="filter-input">
                     <option value="">Select Category</option>
                     <option value="Health">Health</option>
                     <option value="Education">Education</option>
@@ -33,7 +34,7 @@
             </div>
             <div class="filter-group">
                 <label for="location">Location:</label>
-                <select id="location">
+                <select id="location" class="filter-input">
                     <option value="">Select Location</option>
                     <option value="NY">New York</option>
                     <option value="LA">Los Angeles</option>
@@ -42,18 +43,43 @@
             </div>
             <div class="filter-group">
                 <label for="skills">Skills:</label>
-                <select id="skills">
+                <select id="skills" class="filter-input">
                     <option value="">Select Skills</option>
                     <option value="Programming">Programming</option>
                     <option value="Communication">Communication</option>
                     <option value="Management">Management</option>
                 </select>
             </div>
-            <button id="apply-filters">Apply Filters</button>
         </div>
 
-        <div class="opportunity-dashboard" id="opportunity-dashboard">
-            <!-- Opportunities will be dynamically loaded here -->
+        <!-- Opportunities Section -->
+        <div class="opportunity-dashboard">
+            <h2>Opportunities</h2>
+            {% if general_opportunities %}
+                {% for opportunity in general_opportunities %}
+                <div class="opportunity">
+                    <h3>{{ opportunity.title }}</h3>
+                    <p><strong>Organization:</strong> {{ opportunity.organization_name }}</p>
+                    <p><strong>Location:</strong> {{ opportunity.location }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No opportunities found. Please adjust your filters.</p>
+            {% endif %}
+        </div>
+
+        {% if not user_logged_in and more_opportunities_available %}
+        <div class="login-prompt">
+            <p>To see more opportunities, please <a href="/login">Log In</a> or <a href="/signup">Sign Up</a>.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Modal for Login Prompt -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <p>Please <a href="/login">Log In</a> or <a href="/signup">Sign Up</a> to use filters and see more opportunities!</p>
         </div>
     </div>
 </body>

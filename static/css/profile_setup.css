@@ -1,114 +1,147 @@
 /* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Unified font */
     margin: 0;
-    background: linear-gradient(to bottom, #e9f5ff, #ffffff);
-    color: #333;
+    background-color: rgba(34, 34, 34, 1); /* Unified dark background */
+    color: #ffffff; /* Unified text color */
 }
 
 /* Navbar Styles */
 .navbar {
-    background-color: #007bff;
+    background-color: rgba(34, 34, 34, 0.95); /* Unified navbar background */
     color: white;
-    padding: 15px 30px;
+    padding: 15px 30px; /* Consistent padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Consistent border */
+    position: sticky; /* Keeps navbar fixed at the top */
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar .logo {
-    font-size: 20px;
+    font-size: 26px;
     font-weight: bold;
-    color: white;
+    color: #3CB371; /* Unified primary color */
     text-decoration: none;
 }
 
 .nav-links a {
-    color: white;
+    color: #ffffff; /* Unified link text color */
     text-decoration: none;
     margin-left: 20px;
-    font-size: 14px;
+    font-size: 16px;
+    padding: 8px 12px; /* Added padding for hover consistency */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-links a:hover {
-    text-decoration: underline;
+    background-color: #3CB371; /* Unified hover background color */
+    color: #ffffff;
+}
+
+.nav-links a.active {
+    background-color: #3CB371; /* Highlight active link */
 }
 
 /* Container Styles */
 .container {
-    max-width: 900px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 100px auto; /* Increased margin to account for navbar */
+    background: rgba(34, 34, 34, 0.95); /* Unified container background */
+    padding: 40px 50px; /* Spacious padding */
+    border-radius: 15px; /* Softer rounded corners */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Enhanced shadow for a modern look */
 }
 
 h1 {
     text-align: center;
-    color: #007bff;
-    margin-bottom: 20px;
+    color: #3CB371; /* Unified primary color */
+    margin-bottom: 30px; /* Increased spacing */
+    font-size: 32px; /* Slightly larger font for header */
 }
 
 .instructions {
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 14px;
-    color: #666;
+    margin-bottom: 40px; /* More spacious layout */
+    font-size: 16px;
+    color: #dcdcdc; /* Unified secondary text color */
+}
+
+/* Form Styles */
+form {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column for flexibility */
+    gap: 20px; /* Increased gap for more spacing */
 }
 
 form label {
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
-    color: #333;
+    color: #dcdcdc; /* Unified label text color */
 }
 
 form input,
 form select,
 form textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
+    padding: 15px; /* Spacious padding for inputs */
+    margin-bottom: 0; /* Removed redundant margin */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Unified border color */
+    border-radius: 10px; /* Softer rounded corners */
+    font-size: 16px; /* Larger font for readability */
+    background-color: rgba(34, 34, 34, 0.8); /* Unified input background */
+    color: #ffffff; /* Unified input text color */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 form input:focus,
 form select:focus,
 form textarea:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #3CB371; /* Unified focus color */
+    box-shadow: 0 0 8px rgba(60, 179, 113, 0.5); /* Enhanced focus effect */
     outline: none;
 }
 
+textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 120px; /* Set a minimum height */
+}
+
+/* Skills List */
 .skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px; /* Increased spacing between items */
+    margin-top: 10px; /* Added margin for better spacing */
 }
 
 .skill-item {
-    background: #f1f1f1;
-    padding: 8px 12px;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Unified skill background */
+    padding: 10px 16px; /* More padding for spaciousness */
+    border-radius: 25px; /* Softer rounded corners */
     cursor: pointer;
-    transition: 0.3s;
+    color: #dcdcdc; /* Unified text color */
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .skill-item:hover {
-    background: #007bff;
-    color: white;
+    background: #3CB371; /* Unified hover background */
+    color: #ffffff;
 }
 
 /* Buttons */
 button {
-    padding: 12px;
-    font-size: 16px;
+    padding: 15px 20px; /* Spacious padding */
+    font-size: 18px; /* Slightly larger font */
     border: none;
-    border-radius: 5px;
+    border-radius: 10px; /* Softer rounded corners */
     cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 button:hover {
@@ -116,26 +149,34 @@ button:hover {
 }
 
 .save-button {
-    background-color: #007bff;
+    background-color: #3CB371; /* Unified primary button color */
     color: white;
 }
 
 .load-more-button {
-    background-color: #28a745;
+    background-color: #2E8B57; /* Secondary button color */
     color: white;
 }
 
 .skip-button {
-    color: #007bff;
+    color: #3CB371; /* Unified text color */
     text-decoration: none;
-    font-size: 14px;
-    padding: 12px;
-    border: 1px solid #007bff;
-    border-radius: 5px;
+    font-size: 16px; /* Larger font for readability */
+    padding: 12px 20px;
+    border: 1px solid #3CB371; /* Unified border */
+    border-radius: 10px; /* Softer rounded corners */
+    background: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.skip-button:hover {
+    background-color: #3CB371; /* Unified hover background */
+    color: #ffffff;
+}
+
+/* Character Counter */
 .character-counter {
-    font-size: 12px;
+    font-size: 14px; /* Larger font for readability */
     text-align: right;
-    color: #666;
+    color: #dcdcdc; /* Unified secondary text color */
 }

@@ -10,59 +10,54 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="navbar-container">
-            <!-- Logo Section -->
-            <div class="navbar-logo">
-                <a href="{{ url_for('dashboard') }}" class="logo">Social Good Finder</a>
-            </div>
-            <!-- Navigation Links -->
-            <ul class="navbar-links">
-                <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
-                <li><a href="/opportunities" class="nav-link active">Opportunities</a></li>
-                <li><a href="/profile_setup" class="nav-link">Profile</a></li>
-                <li><a href="/login" class="nav-link">Logout</a></li>
-            </ul>
+        <div class="nav-logo">
+            <a href="/" class="logo">Social Good Project Finder</a>
+        </div>
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/opportunities" class="nav-link active">Opportunities</a>
+            <a href="/profile_setup" class="nav-link">Profile</a>
+            <a href="/logout" class="nav-link">Logout</a>
         </div>
     </nav>
 
-<!-- Filters Section -->
-<div class="filters-container">
-    <form id="filterForm" action="{{ url_for('opportunities') }}" method="GET">
-        <div class="filter-group">
-            <!-- Location Filter -->
-            <div class="filter-item">
-                <label for="location" class="filter-label">Location:</label>
-                <input type="text" name="location" id="location" placeholder="Enter City, State" value="{{ request.args.get('location', '') }}">
-            </div>
+    <!-- Filters Section -->
+    <div class="filters-container">
+        <form id="filterForm" action="{{ url_for('opportunities') }}" method="GET">
+            <div class="filter-group">
+                <!-- Location Filter -->
+                <div class="filter-item">
+                    <label for="location" class="filter-label">Location:</label>
+                    <input type="text" name="location" id="location" placeholder="Enter City, State" value="{{ request.args.get('location', '') }}">
+                </div>
 
-            <!-- Category Filter -->
-            <div class="filter-item">
-                <label for="category" class="filter-label">Category:</label>
-                <div class="category-dropdown">
-                    <div class="dropdown-toggle" id="category-dropdown">Select Category <span class="arrow">▼</span></div>
-                    <ul class="dropdown-menu" id="category-menu">
-                        {% for category in categories %}
-                            <li class="dropdown-item" data-value="{{ category }}">{{ category }}</li>
-                        {% endfor %}
-                    </ul>
+                <!-- Category Filter -->
+                <div class="filter-item">
+                    <label for="category" class="filter-label">Category:</label>
+                    <div class="category-dropdown">
+                        <div class="dropdown-toggle" id="category-dropdown">Select Category <span class="arrow">▼</span></div>
+                        <ul class="dropdown-menu" id="category-menu">
+                            {% for category in categories %}
+                                <li class="dropdown-item" data-value="{{ category }}">{{ category }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skills Filter -->
+                <div class="filter-item">
+                    <label for="skills" class="filter-label">Skills:</label>
+                    <input type="text" name="skills" id="skills" placeholder="Enter Skills" value="{{ request.args.get('skills', '') }}">
                 </div>
             </div>
 
-            <!-- Skills Filter -->
-            <div class="filter-item">
-                <label for="skills" class="filter-label">Skills:</label>
-                <input type="text" name="skills" id="skills" placeholder="Enter Skills" value="{{ request.args.get('skills', '') }}">
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button type="submit" class="apply-button">Apply Filters</button>
+                <button type="button" class="clear-button" id="clear-filters">Clear Filters</button>
             </div>
-        </div>
-
-        <!-- Filter Buttons -->
-        <div class="filter-buttons">
-            <button type="submit" class="apply-button">Apply Filters</button>
-            <button type="button" class="clear-button" id="clear-filters">Clear Filters</button>
-        </div>
-    </form>
-</div>
-
+        </form>
+    </div>
 
     <!-- Main Content -->
     <div class="container">
