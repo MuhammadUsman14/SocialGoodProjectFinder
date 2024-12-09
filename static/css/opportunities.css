@@ -43,7 +43,7 @@ body {
 
 .nav-links .nav-link {
     color: #ffffff; /* Unified text color */
-    font-size: 16px; /* Consistent font size */
+    font-size: 18px; /* Increased font size */
     text-decoration: none; /* Remove underline */
     padding: 8px 15px; /* Add padding for better click area */
     border-radius: 5px; /* Rounded corners */
@@ -86,7 +86,7 @@ body {
 }
 
 .filter-label {
-    font-size: 14px; /* Unified label size */
+    font-size: 16px; /* Increased font size */
     color: #dcdcdc; /* Secondary text color */
     margin-bottom: 10px; /* Space below label */
 }
@@ -97,7 +97,7 @@ body {
     padding: 15px; /* Add padding for spaciousness */
     border: 1px solid rgba(255, 255, 255, 0.5); /* Unified border color */
     border-radius: 10px; /* Rounded corners */
-    font-size: 16px; /* Consistent font size */
+    font-size: 18px; /* Increased font size */
     background-color: rgba(34, 34, 34, 0.8); /* Slightly darker input background */
     color: #ffffff; /* Unified input text color */
     transition: all 0.3s ease; /* Smooth hover/focus effects */
@@ -126,7 +126,7 @@ body {
 
 .dropdown-item {
     padding: 15px;
-    font-size: 14px; /* Consistent font size */
+    font-size: 16px; /* Increased font size */
     color: #ffffff; /* Text color */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -178,13 +178,13 @@ body {
 .opportunity-item h3 {
     margin: 0 0 10px;
     color: #3CB371; /* Green for headers */
-    font-size: 20px;
+    font-size: 22px; /* Increased font size */
 }
 
 .opportunity-item p {
     margin: 0;
     color: #555; /* Neutral text color */
-    font-size: 16px;
+    font-size: 18px; /* Increased font size */
     line-height: 1.5;
 }
 
@@ -204,7 +204,7 @@ body {
 .clear-button {
     padding: 12px 20px;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 18px; /* Increased font size */
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease, opacity 0.3s ease;

@@ -204,7 +204,9 @@ def dashboard():
     monthly_contributions = get_monthly_contributions()
 
     # Structure data for chart
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     chart_data = {
+        "months": months,  # Month names
         "donations": monthly_contributions['donations'],
         "hours": monthly_contributions['hours']
     }
@@ -225,7 +227,8 @@ def dashboard():
                            user_profile=user_profile,
                            monthly_contributions=monthly_contributions,
                            donations_by_program=donations_by_program,
-                           hours_by_activity=hours_by_activity)
+                           hours_by_activity=hours_by_activity,
+                           chart_data=chart_data)  # Pass chart_data properly
 
 
 # Route for rendering the opportunities page
@@ -333,19 +336,17 @@ def filter_opportunities():
     })
 
 
-# Route for displaying the donation page
 @app.route('/donate/<int:organization_id>', methods=['GET', 'POST'])
 def donate_form(organization_id):
     print(f"Donate form called with organization_id: {organization_id}")
     if request.method == 'POST':
         user_id = session.get('user_id')
         if not user_id:
-            flash('Please log in to donate.', 'danger')
-            return redirect(url_for('login'))  # Redirect to login if not logged in
+            return jsonify({'success': False, 'message': 'Please log in to donate.'}), 400  # Return a JSON error message
 
         # Extract donation data from the form
         amount = request.form['amount']
-        purpose = request.form['purpose']
+        purpose = request.form.get('purpose', '')  # Handle optional purpose field
 
         # Ensure donation amount is valid
         try:
@@ -353,25 +354,19 @@ def donate_form(organization_id):
             if amount <= 0:
                 raise ValueError
         except ValueError:
-            flash('Invalid donation amount. Please enter a valid number.', 'danger')
-            return redirect(request.referrer)  # Stay on the donation page
+            return jsonify({'success': False, 'message': 'Invalid donation amount. Please enter a valid number.'}), 400
 
         if not is_donation_valid(amount):  # Call the is_donation_valid function from auth.py
-            flash('Donation amount must be between 0 and 100,000.', 'danger')
-            return redirect(request.referrer)  # Stay on the donation page
-        
+            return jsonify({'success': False, 'message': 'Donation amount must be between 0 and 100,000.'}), 400
+
         # Call the add_donation function to insert the donation into the database
         message = add_donation(user_id, organization_id, amount, purpose)
 
-        # Flash the result of the donation attempt
+        # Check if donation was successful
         if 'successfully' in message.lower():
-            flash('Donation successfully added!', 'success')
+            return jsonify({'success': True, 'message': 'Donation successfully added!'}), 200
         else:
-            flash(f'Error: {message}', 'danger')
-
-        # Redirect back to the opportunity details page (or fallback to home if unavailable)
-        return redirect(url_for('opportunity_detail', opportunity_id=organization_id))
-
+            return jsonify({'success': False, 'message': f'Error: {message}'}), 400
 
     # If GET request, render the donation form page
     return render_template('donate.html', organization_id=organization_id)

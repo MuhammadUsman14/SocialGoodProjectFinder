@@ -86,5 +86,51 @@
             </div>
         </section>
     </div>
+
+    <!-- Script to render the chart -->
+    <script>
+        // Get the chart data passed from Flask (converted to a JavaScript object)
+        const chartData = {{ chart_data | tojson }};  // This line takes the chart_data from Flask and makes it available in JS
+
+        // Prepare the data for the chart
+        const monthlyDonations = chartData.donations;  // Array of donations for each month
+        const monthlyHours = chartData.hours;  // Array of volunteer hours for each month
+        const months = chartData.months;  // Array of month names (Jan, Feb, Mar, ...)
+
+        // Create the chart
+        const ctx = document.getElementById('contributionChart').getContext('2d');
+        const contributionChart = new Chart(ctx, {
+            type: 'line',  // Chart type (line chart)
+            data: {
+                labels: months,  // X-axis labels (months of the year)
+                datasets: [
+                    {
+                        label: 'Donations (USD)',
+                        data: monthlyDonations,  // Y-axis data (donations)
+                        borderColor: 'rgba(60, 179, 113, 1)',  // Line color for donations
+                        backgroundColor: 'rgba(60, 179, 113, 0.2)',  // Area under the line color
+                        fill: true,  // Fill the area under the line
+                        tension: 0.4  // Smooth the line
+                    },
+                    {
+                        label: 'Volunteer Hours',
+                        data: monthlyHours,  // Y-axis data (volunteer hours)
+                        borderColor: 'rgba(255, 99, 132, 1)',  // Line color for hours
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',  // Area under the line color
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,  // Make the chart responsive to window size
+                scales: {
+                    y: {
+                        beginAtZero: true  // Start the Y-axis at 0
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
