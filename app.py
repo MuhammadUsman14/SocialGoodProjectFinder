@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify
-from routes.auth import create_user, verify_user, update_user_profile, insert_user_skills, get_user_id_from_email, fetch_skills, add_new_skill, get_user_contact_info, get_donation_history, get_recent_contributions, get_monthly_contributions, get_donations_by_program_and_hours, add_donation, is_organization_valid, is_donation_valid, get_user_skills, get_user_profile, fetch_opportunities, get_recommended_opportunities, fetch_opportunities_by_category, fetch_distinct_categories, fetch_total_opportunities, fetch_opportunity_details, express_user_interest # Import authentication functions from auth.py
+from routes.auth import create_user, verify_user, update_user_profile, insert_user_skills, record_volunteer_hours, fetch_opportunity_by_id, get_user_id_from_email, fetch_skills, add_new_skill, get_user_contact_info, get_donation_history, get_recent_contributions, get_monthly_contributions, get_donations_by_program_and_hours, add_donation, is_organization_valid, is_donation_valid, get_user_skills, get_user_profile, fetch_opportunities, get_recommended_opportunities, fetch_opportunities_by_category, fetch_distinct_categories, fetch_total_opportunities, fetch_opportunity_details, express_user_interest # Import authentication functions from auth.py
 from datetime import datetime
 
 app = Flask(__name__)
@@ -81,10 +81,6 @@ def signup():
             return jsonify({'success': False, 'message': 'An unexpected error occurred.'}), 500
 
     return render_template('signup.html')
-
-
-
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -414,6 +410,82 @@ def express_interest():
     if result['status'] == 'error':
         return jsonify(result), 400
     return jsonify(result), 200
+
+
+@app.route('/volunteer/signup/<int:opportunity_id>', methods=['GET', 'POST'])
+def opportunity_signup(opportunity_id):
+    user_id = session.get('user_id')
+
+    if not user_id:
+        flash("You must be logged in to sign up for an opportunity.", 'danger')
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+
+    # Fetch the opportunity using the fetch_opportunity_by_id function
+    print(f"Attempting to fetch opportunity with ID: {opportunity_id}")
+    opportunity = fetch_opportunity_by_id(opportunity_id)
+
+    if not opportunity:  # No opportunity found
+        print(f"Opportunity with ID {opportunity_id} not found.")
+        return "Opportunity not found", 404
+
+    print(f"Opportunity fetched: {opportunity}")  # Debugging line
+
+    # Validate if the organization is valid
+    print(f"Validating organization with ID: {opportunity['organization_id']}")
+    if not is_organization_valid(opportunity['organization_id']):
+        flash("The organization is not valid or does not exist.", 'danger')
+        print(f"Organization with ID {opportunity['organization_id']} is invalid.")
+        return redirect(url_for('opportunity_detail', opportunity_id=opportunity_id))  # Redirect back to opportunity details page
+
+    # Check if the form is being submitted (POST method)
+    if request.method == 'POST':
+        print("POST request received. Form data should follow:")
+
+        # Print out all the form data
+        print("Form data: ", request.form)
+
+        user_id = session.get('user_id')  # Use session user_id
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+
+        # Print the start date and end date
+        print(f"Start Date: {start_date}")
+        print(f"End Date: {end_date}")
+
+        # Extracting availability data
+        availability = []
+        for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']:
+            if request.form.get(f'{day.lower()}_checked'):
+                start_time = request.form.get(f'{day.lower()}_start')
+                end_time = request.form.get(f'{day.lower()}_end')
+                print(f"Day: {day}, Start Time: {start_time}, End Time: {end_time}")
+                if start_time and end_time:
+                    availability.append((day, start_time, end_time))
+
+        print(f"Availability: {availability}")
+
+        # Record volunteer hours
+        print("Recording volunteer hours...")
+        result = record_volunteer_hours(user_id, opportunity_id, start_date, end_date, availability)
+
+        if result["success"]:
+            flash('Successfully signed up for the opportunity!', 'success')
+            print("Volunteer successfully signed up.")
+            return redirect(url_for('opportunity_detail', opportunity_id=opportunity_id))
+        else:
+            flash(f"Error: {result['error']}", 'danger')
+            print(f"Error while signing up: {result['error']}")
+            return redirect(url_for('opportunity_signup', opportunity_id=opportunity_id))
+
+    # Render the signup form with the opportunity data
+    print("Rendering the opportunity signup form.")
+    return render_template(
+        'opportunity_signup.html',
+        opportunity=opportunity,
+        start_date=opportunity['start_date'],  # Pass start date to the template
+        end_date=opportunity['end_date']      # Pass end date to the template
+    )
+
 
 
 # Logout Route - clears the session and logs the user out

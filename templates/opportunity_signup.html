@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ opportunity.title }} - Volunteer Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/opportunity_signup.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <a href="/" class="logo">Social Good Project Finder</a>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/opportunities" class="nav-link">Opportunities</a>
+      <a href="/profile_setup" class="nav-link">Profile</a>
+      <a href="/logout" class="nav-link">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Opportunity Signup Form -->
+  <div class="signup-container">
+    <h1>Sign Up for "{{ opportunity.title }}"</h1>
+
+    <p><strong>Organization:</strong> {{ opportunity.organization_name }}</p>
+    <p><strong>Location:</strong> {{ opportunity.location_address }}</p>
+
+    <!-- Start Date and End Date on the same line -->
+    <div class="form-group">
+      <label for="start_date">Start Date:</label>
+      <input type="date" id="start_date" name="start_date" placeholder="MM/DD/YYYY" required>
+      
+      <label for="end_date" style="margin-left: 20px;">End Date:</label>
+      <input type="date" id="end_date" name="end_date" placeholder="MM/DD/YYYY" required>
+    </div>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flashes">
+          {% for category, message in messages %}
+            <div class="alert {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Volunteer Signup Form -->
+    <form method="POST" action="{{ url_for('opportunity_signup', opportunity_id=opportunity.opportunity_id) }}">
+      <input type="hidden" name="opportunity_id" value="{{ opportunity.opportunity_id }}">
+
+      <div class="form-group">
+        <label for="availability">Availability:</label>
+        <div class="availability">
+          {% for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+            <div class="day-row">
+              <input type="checkbox" id="{{ day.lower() }}" name="{{ day.lower() }}_checked" value="{{ day }}">
+              <label for="{{ day.lower() }}">{{ day }}</label>
+              <div class="time-range">
+                <label for="{{ day.lower() }}-start">Start:</label>
+                <input type="time" id="{{ day.lower() }}-start" name="{{ day.lower() }}-start" disabled>
+                <label for="{{ day.lower() }}-end">End:</label>
+                <input type="time" id="{{ day.lower() }}-end" name="{{ day.lower() }}-end" disabled>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <small>Select the days and specify time ranges for your availability.</small>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Social Good Project Finder. All rights reserved.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/opportunity_signup.js') }}"></script>
+</body>
+</html>

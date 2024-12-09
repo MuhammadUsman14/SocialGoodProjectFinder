@@ -1,0 +1,139 @@
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+.navbar {
+  background-color: #333;
+  padding: 15px;
+}
+
+.navbar .logo {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.navbar .nav-links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar .nav-link {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+  color: #00aaff;
+}
+
+.signup-container {
+  width: 60%;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signup-container p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form-group button:hover {
+  background-color: #0088cc;
+}
+
+.flashes {
+  margin-bottom: 20px;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.alert.danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.alert.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Availability Section */
+.availability {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.day-row input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.time-range {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.time-range label {
+  margin-right: 5px;
+}
+
+.time-range input[type="time"] {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

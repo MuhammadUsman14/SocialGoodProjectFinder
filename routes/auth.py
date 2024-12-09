@@ -2,8 +2,9 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from geopy.geocoders import Nominatim
+import calendar
 
 app = Flask(__name__)
 app.secret_key = '3683a25f2a44fc627f33d91ec7cd654151f8696a6fffd057'  # Replace with a secure secret key for sessions
@@ -13,7 +14,7 @@ def connect_db():
     return mysql.connector.connect(
         host="localhost",  # e.g., localhost or IP
         user="root",   # MySQL username
-        password="usman123",  # MySQL password
+        password="@MySeniorProJecT21",  # MySQL password
         database="social_good"  # Database name
     )
 
@@ -503,13 +504,17 @@ def get_donations_by_program_and_hours():
 
 
 def is_organization_valid(organization_id):
+    print(f"Checking if organization with ID {organization_id} is valid.")
     db = connect_db()
     cursor = db.cursor()
     cursor.execute("SELECT COUNT(*) FROM Organizations WHERE organization_id = %s", (organization_id,))
     result = cursor.fetchone()
     cursor.close()
     db.close()
+
+    print(f"Organization with ID {organization_id} exists: {result[0] > 0}")  # Debugging line
     return result[0] > 0
+
 
 def is_donation_valid(amount):
     return amount > 0 and amount < 100000
@@ -542,6 +547,70 @@ def add_donation(user_id, organization_id, amount, purpose):
         db.close()
     
     return "Donation successfully added."  # Return success message if donation was added
+
+
+from datetime import datetime, timedelta
+import calendar
+
+def record_volunteer_hours(user_id, opportunity_id, start_date, end_date, availability):
+    if not user_id:  # Check if user_id is None or empty
+        return {"success": False, "error": "User ID is required"}
+
+    if not availability or len(availability) == 0:
+        return {"success": False, "error": "Availability is required"}
+
+    # Check if start_date or end_date is None
+    if not start_date or not end_date:
+        return {"success": False, "error": "Start date and End date are required"}
+
+    try:
+        # Convert start_date and end_date to datetime objects
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    except ValueError:
+        return {"success": False, "error": "Invalid date format. Please use YYYY-MM-DD."}
+
+    # Connect to database
+    db = connect_db()
+    cursor = db.cursor()
+
+    try:
+        # Loop through the availability and calculate hours
+        for day, start_time, end_time in availability:
+            # Parse start_time and end_time to datetime objects
+            start_time_obj = datetime.strptime(start_time, '%H:%M')
+            end_time_obj = datetime.strptime(end_time, '%H:%M')
+
+            # Calculate the difference between start and end time (in hours)
+            duration = (end_time_obj - start_time_obj).total_seconds() / 3600.0
+
+            # Get all occurrences of the selected day within the date range
+            current_date = start_date
+            while current_date <= end_date:
+                # Check if the current_date is the selected day
+                if current_date.weekday() == calendar.day_name.index(day):
+                    # Insert into VolunteerHours table (using current_date for 'date')
+                    cursor.execute("""
+                        INSERT INTO VolunteerHours (user_id, opportunity_id, hours_volunteered, date)
+                        VALUES (%s, %s, %s, %s)
+                    """, (user_id, opportunity_id, duration, current_date.date()))
+
+                    db.commit()
+
+                # Move to the next week
+                current_date += timedelta(days=7)
+
+        return {"success": True, "message": "Successfully signed up", "total_hours": len(availability)}
+
+    except Exception as e:
+        db.rollback()
+        print(f"Error while inserting volunteer hours: {e}")
+        return {"success": False, "error": str(e)}
+    finally:
+        cursor.close()
+        db.close()
+
+
 
 # Function to fetch distinct categories from the Volunteer_Opportunities table
 def fetch_distinct_categories(offset=0, limit=5):
@@ -640,10 +709,46 @@ def fetch_opportunities(location=None, category=None, skills=None, offset=0, lim
         cursor.close()
         db.close()
 
+
+def fetch_opportunity_by_id(opportunity_id):
+    print(f"Fetching opportunity with ID: {opportunity_id}")
+    db = connect_db()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT V.opportunity_id, V.title, V.location_address, V.category, V.required_skills, V.start_date, V.end_date, V.organization_id, O.name AS organization_name
+        FROM Volunteer_Opportunities V
+        JOIN Organizations O ON V.organization_id = O.organization_id
+        WHERE V.opportunity_id = %s
+    """, (opportunity_id,))
+    opportunity = cursor.fetchone()
+    cursor.close()
+    db.close()
+
+    print(f"Fetched Opportunity: {opportunity}")  # Debugging line
+    return opportunity
+
+
+def fetch_opportunity_by_id(opportunity_id):
+    print(f"Fetching opportunity with ID: {opportunity_id}")
+    db = connect_db()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT V.opportunity_id, V.title, V.location_address, V.category, V.required_skills, V.start_date, V.end_date, V.organization_id, O.name AS organization_name
+        FROM Volunteer_Opportunities V
+        JOIN Organizations O ON V.organization_id = O.organization_id
+        WHERE V.opportunity_id = %s
+    """, (opportunity_id,))
+    opportunity = cursor.fetchone()
+    cursor.close()
+    db.close()
+
+    print(f"Fetched Opportunity: {opportunity}")  # Debugging line
+    return opportunity
+
+
 def fetch_opportunity_details(opportunity_id):
     db = connect_db()
     cursor = db.cursor(dictionary=True)
-    
     
     query = """
         SELECT O.organization_id, O.name AS organization_name, V.opportunity_id, V.title, V.description AS role_description, V.category, V.required_skills, V.location_address,  
@@ -735,6 +840,7 @@ def recommend_opportunities(user_id):
     recommended_opportunities = fetch_opportunities(skills=user_skills)
 
     return recommended_opportunities
+
 
 
 def express_user_interest(user_id, opportunity_id, comment=None):

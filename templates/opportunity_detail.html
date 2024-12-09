@@ -32,10 +32,10 @@
           <a href="{{ url_for('donate_form', organization_id=opportunity.organization_id) }}">
             <button class="donate-btn">Donate</button>
           </a>
-          <form id="express-interest-form">
-            <input type="hidden" name="opportunity_id" value="{{ opportunity.opportunity_id }}">
-            <button type="submit" class="volunteer-btn">I Want to Help</button>
-          </form>
+          <!-- Updated button as a link instead of a form -->
+          <a href="{{ url_for('opportunity_signup', opportunity_id=opportunity.opportunity_id) }}">
+            <button class="volunteer-btn">I Want to Help</button>
+          </a>
         </div>
       </div>
       <div class="description">
