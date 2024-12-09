@@ -265,7 +265,7 @@ def opportunities():
             limit=limit
         )  # First 10 general opportunities
 
-        recommended_opportunities = get_recommended_opportunities(user_id=user_id), # Pass the user_id dynamically
+        recommended_opportunities = get_recommended_opportunities(user_id=user_id) # Pass the user_id dynamically
         categories = fetch_distinct_categories(offset=0, limit=5)
 
     except Exception as e:
