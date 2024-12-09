@@ -6,6 +6,7 @@
     <title>User Dashboard</title>
     <link rel="stylesheet" href="/static/css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/dashboard.js" defer></script>
 </head>
 <body>
     <!-- Main Navigation Bar -->
@@ -16,7 +17,7 @@
         <div class="nav-links">
             <a href="#" class="nav-link active">Dashboard</a>
             <a href="{{ url_for('opportunities') }}" class="nav-link">Opportunities</a>
-            <a href="/profile" class="nav-link">Profile Setup</a>
+            <a href="/profile_setup" class="nav-link">Profile Setup</a>
             <a href="/logout" class="nav-link">Log Out</a>
         </div>
     </nav>
@@ -80,10 +81,10 @@
                 <span class="hours">Hours</span>
                 <span class="donations">Donations</span>
             </div>
-            <canvas id="contributionChart"></canvas>
+            <div class="chart-container">
+                <canvas id="contributionChart"></canvas>
+            </div>
         </section>
     </div>
-
-    <script src="/static/js/dashboard.js"></script>
 </body>
 </html>
