@@ -106,14 +106,19 @@ def insert_volunteer_opportunities():
     print("Inserting Volunteer Opportunities...")
     cursor.execute("SELECT organization_id FROM Organizations")
     organizations = [org[0] for org in cursor.fetchall()]  # Fetching all organization IDs
-    
+
+    # Fetching all skills from the Skills table (the complete list)
+    cursor.execute("SELECT skill_name FROM Skills")
+    all_skills = [skill[0] for skill in cursor.fetchall()]  # Fetching all skill names
+
     categories = ["Education", "Health", "Environment", "Legal", "Arts", "Social Impact", "Technology", "Community Outreach", "Fundraising"]
     
     for org_id in organizations:
         for _ in range(20):  # 20 Opportunities per organization
             title = fake.job() + " Volunteer"
             description = fake.paragraph(nb_sentences=5)
-            required_skills = random.sample(["Writing", "Research", "Project Management", "Marketing", "Graphic Design", "Public Speaking"], 3)
+            # Choose 3 random skills from the entire list of skills
+            required_skills = random.sample(all_skills, 3)
             required_skills_str = ", ".join(required_skills)
             location_address = fake.address().replace("\n", " ")
             location_lat, location_lon = get_lat_lon(location_address)
